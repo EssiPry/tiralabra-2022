@@ -29,20 +29,20 @@ class Ristinolla:
 
     def paattyko_peli(self):
         for i in range(3):
-            if self.pelitilanne [i] == ['X', 'X', 'X']:
+            if self.pelitilanne[i] == ['X', 'X', 'X']:
                 return 'X'
         for i in range(3):
-            if self.pelitilanne [i] == ['0', '0', '0']:
+            if self.pelitilanne[i] == ['0', '0', '0']:
                 return '0'
 
         for i in range(3):
             if self.pelitilanne[0][i] != '.' and self.pelitilanne[0][i] == self.pelitilanne[1][i] and self.pelitilanne[1][i] == self.pelitilanne[2][i]:
                 return self.pelitilanne[0][i]
 
-        if self.pelitilanne[0][0]!= '.' and self.pelitilanne[0][0] == self.pelitilanne[1][1] and self.pelitilanne[1][1] == self.pelitilanne[2][2]:
+        if self.pelitilanne[0][0] != '.' and self.pelitilanne[0][0] == self.pelitilanne[1][1] and self.pelitilanne[1][1] == self.pelitilanne[2][2]:
             return self.pelitilanne[0][0]
 
-        if self.pelitilanne[2][0]!= '.' and self.pelitilanne[2][0] == self.pelitilanne[1][1] and self.pelitilanne[1][1] == self.pelitilanne[0][2]:
+        if self.pelitilanne[2][0] != '.' and self.pelitilanne[2][0] == self.pelitilanne[1][1] and self.pelitilanne[1][1] == self.pelitilanne[0][2]:
             return self.pelitilanne[2][0]
 
         for i in range(3):
@@ -51,24 +51,26 @@ class Ristinolla:
                     return 'kesken'
         return 'tasapeli'
 
-    def voitto(self, voittaja):
+    def voitto(voittaja):
         if voittaja == 'X':
             return -1
         elif voittaja == '0':
             return 1
-        elif voittaja == 'tasapeli':
-            return 0
+        return 0
 
-def minimax(self):
+
+def minimax():
     pass
 
-def suurin_arvo(self, ristinolla):
+
+def suurin_arvo(ristinolla):
     if ristinolla.paattyyko_peli() != 'kesken':
         return ristinolla.voitto(ristinolla.paattyyko_peli())
     arvo = -100
     return arvo
 
-def pienin_arvo(self, ristinolla):
+
+def pienin_arvo(ristinolla):
     if ristinolla.paattyyko_peli != 'kesken':
         return ristinolla.voitto(ristinolla.paattyyko_peli())
     arvo = 100
