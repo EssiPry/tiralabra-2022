@@ -1,11 +1,12 @@
 ## Tietorakenteet ja algoritmit harjoitustyö
 
-Ristinolla tekoäly
+Ristinolla
 
-#### Dokumentaatio
+### Dokumentaatio
 
 * [Määrittelydokumentti](https://github.com/EssiPry/tiralabra-2022/blob/main/dokumentaatio/maarittelydokumentti.md)
 
-#### Viikkoraportit
+### Viikkoraportit
 
 * [Viikkoraportti 1](https://github.com/EssiPry/tiralabra-2022/blob/main/dokumentaatio/viikkoraportit/Viikkoraportti1.md)
+* [Viikkoraportti 2](https://github.com/EssiPry/tiralabra-2022/blob/main/dokumentaatio/viikkoraportit/Viikkoraportti2.md)
