@@ -1,96 +1,112 @@
 class Ristinolla:
 
     def __init__(self):
-        self.pelitilanne = [['.' for x in range(5)]for y in range(5)]
-        self.AIn_vuoro = False
-        self.viimeisin_siirto = None
-        self.jaljella_olevat_siirrot = []
-
-    def luo_jaljella_olevat_siirrot(self):
-        siirrot = []
-        for i in range(5):
-            for j in range(5):
-                siirrot.append((i,j))
-        self.jaljella_olevat_siirrot = siirrot
-
-    def paivita_jaljella_olevat_siirrot(self):
-        if self.viimeisin_siirto in self.jaljella_olevat_siirrot:
-            self.jaljella_olevat_siirrot.remove(self.viimeisin_siirto)
-
-    def paivita_viimeisin_siirto(self, siirto):
-        self.viimeisin_siirto = siirto
+        '''Luokan konstruktori'''
+        self.pelitilanne = [['.' for x in range(25)]for y in range(25)]
+        self.maksimin_vuoro = False
+        self.maksin_siirto = None
+        self.minin_siirto = None
+        self.siirtojen_lkm  = 0
 
     def tulosta_pelitilanne(self):
-        for i in range(5):
-            for j in range(5):
+        '''Metodi tulostaa sen hetkisen pelitilanteen'''
+        for i in range(25):
+            for j in range(25):
                 print(self.pelitilanne[i][j], end=" ")
             print("")
         print("")
 
-    def onko_siirto_sallittu(self):
-        rivi = self.viimeisin_siirto[0]
-        sarake = self.viimeisin_siirto[1]
-        if rivi < 0 or rivi > 5 or sarake < 0 or sarake > 5:
-            return False
-        if self.pelitilanne[rivi][sarake] == 'X' or self.pelitilanne[rivi][sarake] == '0':
-            return False
-        return True
-
-    def lisaa_merkki(self, rivi, sarake):
-        if self.onko_siirto_sallittu(rivi, sarake):
-            if self.AIn_vuoro:
-                self.pelitilanne[rivi][sarake] = '0'
-            else:
-                self.pelitilanne[rivi][sarake] = 'X'
+    def lisaa_merkki(self, koordinaatit):
+        ''' Metodi lisää merkin X tai 0 pelaajan tai botin antamiin koordinaatteihin.'''
+        rivi = koordinaatit[0]
+        sarake = koordinaatit[1]
+        if self.maksimin_vuoro:
+            self.pelitilanne[rivi][sarake] = 'X'
         else:
-            if not self.AIn_vuoro:
-                print('Valitse toinen ruutu')
+            self.pelitilanne[rivi][sarake] = '0'
 
-    def paattyko_peli(self):
-        rivi = self.viimeisin_siirto[0]
-        sarake = self.viimeisin_siirto[1]
+    def paivita_viimeisin_siirto(self, siirto):
+        '''Metodi päivittää pelaajan tai botin viimeisimmän siirron ristinolla-olioon'''
+        if self.maksimin_vuoro:
+            self.maksin_siirto = siirto
+        else:
+            self.minin_siirto = siirto
 
-        if self.pelitilanne[rivi] == ['X', 'X', 'X', 'X', 'X']:
-                return 'X'
-        if self.pelitilanne[rivi] == ['0', '0', '0', '0', '0']:
-                return '0'
+    def seuraavat_siirrot(self):
+        siirrot = []
+        if self.maksin_siirto != None:
+            for rivi in (-1,0,1):
+                for sarake in (-1,0,1):
+                    if self.pelitilanne[self.maksin_siirto[1]+rivi][self.maksin_siirto+sarake] == '.':
+                        siirrot.append((self.maksin_siirto[1]+rivi,self.maksin_siirto+sarake))
+        if self.minin_siirto != None:
+            for rivi in (-1,0,1):
+                for sarake in (-1,0,1):
+                    if self.pelitilanne[self.minin_siirto[1]+rivi][self.minin_siirto+sarake] == '.':
+                        siirrot.append((self.minin_siirto[1]+rivi,self.minin_siirto+sarake))
+        print(siirrot)
+        return siirrot
 
-        if self.pelitilanne[0][sarake] != '.' and self.pelitilanne[0][sarake] == self.pelitilanne[1][sarake] and self.pelitilanne[1][sarake] == self.pelitilanne[2][sarake] and self.pelitilanne[2][sarake] == self.pelitilanne[3][sarake] and self.pelitilanne[3][sarake] == self.pelitilanne[4][sarake] :
-                return self.pelitilanne[0][sarake]
+    def tarkista_voitto(self):
+        '''Metodi tarkistaa täydentääkö viimeisin siirto pelilaudalle 5 peräkkäistä samaa
+        merkkiä eli voittaako siirto pelin'''
 
-        if self.pelitilanne[0][0] != '.' and self.pelitilanne[0][0] == self.pelitilanne[1][1] and self.pelitilanne[1][1] == self.pelitilanne[2][2] and self.pelitilanne[1][1] == self.pelitilanne[3][3] and self.pelitilanne[1][1] == self.pelitilanne[4][4]:
-            return self.pelitilanne[0][0]
+        if self.maksimin_vuoro:
+            rivi = self.maksin_siirto[0]
+            sarake = self.maksin_siirto [1]
+        else:
+            rivi = self.minin_siirto[0]
+            sarake = self.minin_siirto[1]
 
-        if self.pelitilanne[4][0] != '.' and self.pelitilanne[4][0] == self.pelitilanne[3][1] and self.pelitilanne[4][0] == self.pelitilanne[2][2] and self.pelitilanne[4][0] == self.pelitilanne[1][3] and self.pelitilanne[4][0] == self.pelitilanne[0][4]:
-            return self.pelitilanne[2][0]
+        alku_rivi = max(rivi-4, 0)
+        alku_sarake = max(sarake-4,0)
+        loppu_rivi = min(rivi+5, 24)
+        loppu_sarake = min(sarake + 5, 24)
 
-        for i in range(5):
-            for j in range(5):
-                if self.pelitilanne[i][j] == '.':
-                    return 'kesken'
-        return 'tasapeli'
+        vaaka = 1
+        for i in range(alku_sarake, loppu_sarake):
 
-    def voitto(voittaja):
-        if voittaja == 'X':
-            return -1
-        elif voittaja == '0':
-            return 1
-        return 0
+            if self.pelitilanne[rivi][i] == self.pelitilanne[rivi][i+1]:
+                vaaka += 1
+                if vaaka == 5:
+                    return 'voitto'
+            else:
+                vaaka = 0
 
+        pysty = 1
+        for i in range(alku_rivi, loppu_rivi):
+            if self.pelitilanne[i][sarake] == self.pelitilanne[i+1][sarake]:
+                pysty += 1
+                if pysty == 5:
+                    return 'voitto'
+            else:
+                pysty = 0
 
-def minimax():
-    pass
+        diagonaali = 1
+        j = alku_sarake
+        for i in range(alku_rivi, loppu_rivi):
+            if self.pelitilanne[i][j] == self.pelitilanne[i+1][j+1]:
+                diagonaali += 1
+                if diagonaali == 5:
+                    return 'voitto'
+            else:
+                diagonaali = 0
+            j += 1
 
+        diagonaali2 = 1
+        j = loppu_rivi
+        for j in range(alku_sarake, loppu_sarake):
+            if self.pelitilanne[i][j] == self.pelitilanne[i-1][j+1]:
+                diagonaali2 += 1
+                if diagonaali2 == 5:
+                    return 'voitto'
+            else:
+                diagonaali2 = 0
+            i -= 1
+            if i < 0:
+                break
 
-def suurin_arvo(ristinolla):
-    if ristinolla.paattyyko_peli() != 'kesken':
-        return ristinolla.voitto(ristinolla.paattyyko_peli())
-    arvo = -100
-    return arvo
+        if self.siirtojen_lkm == 625:
+            return 'tasapeli'
 
-
-def pienin_arvo(ristinolla):
-    if ristinolla.paattyyko_peli != 'kesken':
-        return ristinolla.voitto(ristinolla.paattyyko_peli())
-    arvo = 100
-    return arvo
+        return 'kesken'
