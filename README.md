@@ -1,6 +1,6 @@
 ## Tietorakenteet ja algoritmit harjoitustyö
 
-Ristinolla 25x25 ruudukolla. Peli on vielä kesken ja sitä ei voi vielä pelata.
+Ristinolla 25x25 ruudukolla. Peli on vielä kesken ja sitä ei valitettavasti voi pelata.
 
 ### Dokumentaatio
 
