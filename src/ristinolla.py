@@ -35,7 +35,7 @@ class Ristinolla:
             else:
                 self.pelilauta[rivi][sarake] = '0'
             self.paivita_viimeisin_siirto(koordinaatit)
-            self.vaihda_vuoro()
+            self.siirtojen_lkm += 1
 
     def paivita_viimeisin_siirto(self, koordinaatit):
         '''Metodi päivittää pelaajan tai botin viimeisimmän siirron ristinolla-olioon'''
@@ -72,7 +72,8 @@ class Ristinolla:
 
     def tarkista_voitto(self):
         '''Metodi tarkistaa täydentääkö viimeisin siirto pelilaudalle 5 peräkkäistä samaa
-        merkkiä eli voittaako siirto pelin'''
+        merkkiä eli voittaako siirto pelin. Metodi palauttaa voittavan stringin merkin, tai tekstin tasapeli
+        '''
 
         if self.maksin_vuoro and self.maksin_siirto is not None:
             rivi = self.maksin_siirto[0]
@@ -105,28 +106,29 @@ class Ristinolla:
             else:
                 pysty = 0
 
-        diagonaali = 1
-        j = alku_sarake
-        for i in range(alku_rivi, loppu_rivi):
-            if self.pelilauta[i][j] == self.pelilauta[i+1][j+1]:
-                diagonaali += 1
-                if diagonaali == 5:
-                    return self.pelilauta[i][j]
-            else:
-                diagonaali = 0
-            j += 1
+        #nämä eivät vielä toimi
+        #diagonaali = 1
+        #j = alku_sarake
+        #for i in range(alku_rivi, loppu_rivi):
+        #    if self.pelilauta[i][j] == self.pelilauta[i+1][j+1]:
+        #        diagonaali += 1
+        #        if diagonaali == 5:
+        #            return self.pelilauta[i][j]
+        #    else:
+        #        diagonaali = 0
+        #    j += 1
 
-        diagonaali2 = 1
-        j = loppu_rivi
-        for j in range(alku_sarake, loppu_sarake):
-            if self.pelilauta[i][j] == self.pelilauta[i-1][j+1]:
-                diagonaali2 += 1
-                if diagonaali2 == 5:
-                    return self.pelilauta[i][j]
-                diagonaali2 = 0
-            i -= 1
-            if i < 0:
-                break
+        #diagonaali2 = 1
+        #j = loppu_rivi
+        #for j in range(alku_sarake, loppu_sarake):
+        #    if self.pelilauta[i][j] == self.pelilauta[i-1][j+1]:
+        #        diagonaali2 += 1
+        #        if diagonaali2 == 5:
+        #            return self.pelilauta[i][j]
+        #        diagonaali2 = 0
+        #    i -= 1
+        #    if i < 0:
+        #        break
 
         if self.siirtojen_lkm == 625:
             return 'tasapeli'

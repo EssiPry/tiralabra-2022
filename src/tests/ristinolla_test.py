@@ -13,6 +13,7 @@ class TestRistinolla(unittest.TestCase):
     def test_lisaa_merkki(self):
         self.ristinolla.lisaa_merkki((2, 3))
         self.assertEqual(self.ristinolla.pelilauta[2][3], 'X')
+        self.ristinolla.vaihda_vuoro()
         self.ristinolla.lisaa_merkki((0, 11))
         self.assertEqual(self.ristinolla.pelilauta[0][11], '#')
         self.ristinolla.lisaa_merkki((1, 10))
