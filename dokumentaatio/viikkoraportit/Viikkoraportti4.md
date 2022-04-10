@@ -22,4 +22,4 @@ Lisäksi aloitin yksikkötestin kirjoittamisen ja lisäsin koodin kommentoinnin.
 
 ---
 
-Käytetyt tunnit 20h
+Käytetyt tunnit 15h
