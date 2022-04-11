@@ -82,53 +82,61 @@ class Ristinolla:
             rivi = self.minin_siirto[0]
             sarake = self.minin_siirto[1]
 
-        alku_rivi = max(rivi-4, 1)
-        alku_sarake = max(sarake-4, 1)
-        loppu_rivi = min(rivi+5, 25)
-        loppu_sarake = min(sarake+5, 25)
+        eka_rivi = max(rivi-4, 1)
+        eka_sarake = max(sarake-4, 1)
+        vika_rivi = min(rivi+5, 25)
+        vika_sarake = min(sarake+5, 25)
 
-        vaaka = 1
-        for i in range(alku_sarake, loppu_sarake):
+        vaaka = 0
+        for i in range(eka_sarake, vika_sarake):
 
-            if self.pelilauta[rivi][i] == self.pelilauta[rivi][i+1]:
+            if self.pelilauta[rivi][i] == self.pelilauta[rivi][i+1] and self.pelilauta[rivi][i] != '.':
                 vaaka += 1
-                if vaaka == 5:
+                if vaaka == 4:
                     return self.pelilauta[rivi][i]
             else:
                 vaaka = 0
 
-        pysty = 1
-        for i in range(alku_rivi, loppu_rivi):
-            if self.pelilauta[i][sarake] == self.pelilauta[i+1][sarake]:
+        pysty = 0
+        for i in range(eka_rivi, vika_rivi):
+            if self.pelilauta[i][sarake] == self.pelilauta[i+1][sarake] and self.pelilauta[i][sarake] != '.':
                 pysty += 1
-                if pysty == 5:
+                if pysty == 4:
                     return self.pelilauta[i][sarake]
             else:
                 pysty = 0
 
-        #nämä eivät vielä toimi
-        #diagonaali = 1
-        #j = alku_sarake
-        #for i in range(alku_rivi, loppu_rivi):
-        #    if self.pelilauta[i][j] == self.pelilauta[i+1][j+1]:
-        #        diagonaali += 1
-        #        if diagonaali == 5:
-        #            return self.pelilauta[i][j]
-        #    else:
-        #        diagonaali = 0
-        #    j += 1
 
-        #diagonaali2 = 1
-        #j = loppu_rivi
-        #for j in range(alku_sarake, loppu_sarake):
-        #    if self.pelilauta[i][j] == self.pelilauta[i-1][j+1]:
-        #        diagonaali2 += 1
-        #        if diagonaali2 == 5:
-        #            return self.pelilauta[i][j]
-        #        diagonaali2 = 0
-        #    i -= 1
-        #    if i < 0:
-        #        break
+        d1 = 0
+        px = rivi - 4
+        py = sarake - 4
+
+        for i in range(9):
+            if px > 0 and px < 26 and py > 0 and py < 26:
+                if self.pelilauta[px][py] == self.pelilauta[px+1][py+1] and self.pelilauta[px][py] != '.':
+                    d1 += 1
+                    if d1 == 4:
+                        return self.pelilauta[px][py]
+                else:
+                    d1 = 0
+            px += 1
+            py += 1
+
+        d2 = 0
+
+        px2 = rivi + 4
+        py2 = sarake -4
+
+        for i in range(9):
+            if px2 > 0 and px2 < 26 and py2 > 0 and py2 < 26:
+                if self.pelilauta[px2][py2] == self.pelilauta[px2-1][py2+1] and self.pelilauta[px2][py2] != '.':
+                    d2 += 1
+                    if d2 == 4:
+                        return self.pelilauta[px2][py2]
+                else:
+                    d2 = 0
+            px2 -= 1
+            py2 += 1
 
         if self.siirtojen_lkm == 625:
             return 'tasapeli'

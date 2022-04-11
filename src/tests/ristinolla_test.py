@@ -25,7 +25,6 @@ class TestRistinolla(unittest.TestCase):
         self.ristinolla.vaihda_vuoro()
         self.assertTrue(self.ristinolla.maksin_vuoro)
 
-
     def test_tarkista_voitto_vaaka(self):
         self.ristinolla.pelilauta[2][3] = 'X'
         self.ristinolla.pelilauta[2][4] = 'X'
@@ -45,6 +44,28 @@ class TestRistinolla(unittest.TestCase):
         self.assertEqual(self.ristinolla.tarkista_voitto(), 'X')
         self.ristinolla.pelilauta[1][7] = '0'
         self.assertEqual(self.ristinolla.tarkista_voitto(), 'kesken')
+
+
+    def test_tarkista_voitto_d1(self):
+        self.ristinolla.pelilauta[1][6] = 'X'
+        self.ristinolla.pelilauta[2][7] = 'X'
+        self.ristinolla.pelilauta[3][8] = 'X'
+        self.ristinolla.pelilauta[4][9] = 'X'
+        self.ristinolla.pelilauta[5][10] = 'X'
+        self.assertEqual(self.ristinolla.tarkista_voitto(), 'X')
+        self.ristinolla.pelilauta[5][10] = '0'
+        self.assertEqual(self.ristinolla.tarkista_voitto(), 'kesken')
+
+    def test_tarkista_voitto_d2(self):
+        self.ristinolla.pelilauta[5][4] = 'X'
+        self.ristinolla.pelilauta[4][5] = 'X'
+        self.ristinolla.pelilauta[3][6] = 'X'
+        self.ristinolla.pelilauta[2][7] = 'X'
+        self.ristinolla.pelilauta[1][8] = 'X'
+        self.assertEqual(self.ristinolla.tarkista_voitto(), 'X')
+        self.ristinolla.pelilauta[3][6] = '0'
+        self.assertEqual(self.ristinolla.tarkista_voitto(), 'kesken')
+
 
     def test_seuraavat_siirrot(self):
         self.ristinolla.pelilauta[2][7] = 'X'
