@@ -26,15 +26,17 @@ class Alphabeta:
             return 0, 0
 
         arvo = -100
-        siirrot = ristinolla.seuraavat_siirrot()
-        for koordinaatit in siirrot:
+
+        for koordinaatit in ristinolla.siirrot:
             seuraava_siirto = koordinaatit
             kopio_peli = deepcopy(ristinolla)
             kopio_peli.lisaa_merkki(koordinaatit)
+            kopio_peli.paivita_seuraavat_siirrot(koordinaatit)
             arvo = max(arvo, self.minimi_ab(kopio_peli, syvyys-1, alpha, beta)[0])
             if arvo >= beta:
                 break
             alpha = max(alpha, arvo)
+        #print('maksimi', arvo, seuraava_siirto)
         return [arvo, seuraava_siirto]
 
 
@@ -52,13 +54,14 @@ class Alphabeta:
 
         arvo = 100
         seuraava_siirto = 0
-        siirrot = ristinolla.seuraavat_siirrot()
-        for koordinaatit in siirrot:
+        for koordinaatit in ristinolla.siirrot:
             seuraava_siirto = koordinaatit
             kopio_peli = deepcopy(ristinolla)
             kopio_peli.lisaa_merkki(koordinaatit)
+            kopio_peli.paivita_seuraavat_siirrot(koordinaatit)
             arvo = min(arvo, self.maksimi_ab(kopio_peli, syvyys-1, alpha, beta)[0])
             if arvo <= alpha:
                 break
             beta = max(beta, arvo)
+        #print('minimi', arvo, seuraava_siirto)
         return [arvo, seuraava_siirto]
