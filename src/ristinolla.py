@@ -6,7 +6,7 @@ class Ristinolla:
         self.maksin_vuoro = False
         self.maksin_siirto = None
         self.minin_siirto = None
-        self.siirrot = set()
+        self.seuravat_siirrot = set()
         self.siirtojen_lkm = 0
 
     def lisaa_reunat_lautaan(self):
@@ -26,6 +26,15 @@ class Ristinolla:
             print("")
         print("")
 
+    def onko_sallittu_siirto(self, koordinaatit):
+        '''Metodi tarkistaa voiko annetuille koordinaateille pelata merkkiä vai ei.
+        Palauttaa True jos siirto on sallittu, False jos ei ole.'''
+        rivi = koordinaatit[0]
+        sarake = koordinaatit[1]
+        if self.pelilauta[rivi][sarake] == '.':
+            return True
+        return False
+
     def lisaa_merkki(self, koordinaatit):
         ''' Metodi lisää merkin X tai 0 pelaajan tai botin antamiin koordinaatteihin.'''
         rivi = koordinaatit[0]
@@ -38,6 +47,13 @@ class Ristinolla:
             self.paivita_viimeisin_siirto(koordinaatit)
             self.siirtojen_lkm += 1
 
+    def poista_merkki(self, koordinaatit):
+        '''Metodi muuttaa annetut koordinaatit tyhjäksi (.) eli poistaa merkin.'''
+        rivi = koordinaatit[0]
+        sarake = koordinaatit[1]
+        if self.pelilauta[rivi][sarake] != '#':
+            self.pelilauta[rivi][sarake] = '.'
+            self.siirtojen_lkm -= 1
 
     def paivita_viimeisin_siirto(self, koordinaatit):
         '''Metodi päivittää pelaajan tai botin viimeisimmän siirron ristinolla-olioon'''
@@ -53,36 +69,17 @@ class Ristinolla:
         else:
             self.maksin_vuoro = True
 
-    def seuraavat_siirrot(self):
-        '''Metodi palauttaa listan AIn seuraavien mahdollisten siirtojen koordinaateista.
-        Koordinaatit ovat edellisten siirtojen viereiset tyhjät koordinaatit.'''
-        siirrot = []
-        if self.maksin_siirto is not None:
-            for rivi in (-1, 0, 1):
-                for sarake in (-1, 0, 1):
-                    if self.pelilauta[self.maksin_siirto[0]+rivi][self.maksin_siirto[1]+sarake] == '.':
-                        siirrot.append(
-                            (self.maksin_siirto[0]+rivi, self.maksin_siirto[1]+sarake))
-        if self.minin_siirto is not None:
-            for rivi in (-1, 0, 1):
-                for sarake in (-1, 0, 1):
-                    if self.pelilauta[self.minin_siirto[0]+rivi][self.minin_siirto[1]+sarake] == '.':
-                        siirrot.append(
-                            (self.minin_siirto[0]+rivi, self.minin_siirto[1]+sarake))
-        siirrot = list(set(siirrot))
-        return siirrot
-
-
     def paivita_seuraavat_siirrot(self, koordinaatit):
         '''Metodi poistaa annetut koordinaatit seuraavien mahdollisten siirtojen joukosta, ja lisää annettujen
         koordinaattien tyhjät naapurit seuraavien mahdollistojen siirtojen joukkoon'''
-        if koordinaatit in self.siirrot:
-            self.siirrot.remove(koordinaatit)
+        if koordinaatit in self.seuravat_siirrot:
+            self.seuravat_siirrot.remove(koordinaatit)
         for rivi in (-1, 0, 1):
             for sarake in (-1, 0, 1):
                 if self.pelilauta[koordinaatit[0]+rivi][koordinaatit[1]+sarake] == '.':
-                    self.siirrot.add(
+                    self.seuravat_siirrot.add(
                         (koordinaatit[0]+rivi, koordinaatit[1]+sarake))
+
 
     def tarkista_voitto(self):
         '''Metodi tarkistaa täydentääkö viimeisin siirto pelilaudalle 5 peräkkäistä samaa
