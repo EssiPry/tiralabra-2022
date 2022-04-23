@@ -1,26 +1,13 @@
 from ristinolla import Ristinolla
 from alphabeta import Alphabeta
+from pelilooppi import Pelilooppi
+
 
 def main():
     ristinolla = Ristinolla()
-    ristinolla.lisaa_reunat_lautaan()
-
     botti = Alphabeta()
-    ristinolla.maksin_vuoro = False
-    ristinolla.lisaa_merkki((1,3))
-    ristinolla.paivita_seuraavat_siirrot((1,3,))
-    ristinolla.vaihda_vuoro()
-    ristinolla.tulosta_pelitilanne()
-    while True:
-        seuraava_siirto = botti.minimax_ab(ristinolla, 3, -100, 100)[1]
-        print(seuraava_siirto)
-        ristinolla.lisaa_merkki(seuraava_siirto)
-        ristinolla.paivita_seuraavat_siirrot(seuraava_siirto)
-        ristinolla.tulosta_pelitilanne()
-        if ristinolla.tarkista_voitto() == 'X' or ristinolla.tarkista_voitto == '0' or ristinolla.tarkista_voitto == 'tasapeli':
-            break
-        ristinolla.vaihda_vuoro()
-    print('Peli loppui. Tittidii.')
+    peli = Pelilooppi(ristinolla, botti)
+    peli.aloita_peli()
 
 
 if __name__ == "__main__":

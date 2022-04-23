@@ -6,7 +6,7 @@ class Ristinolla:
         self.maksin_vuoro = False
         self.maksin_siirto = None
         self.minin_siirto = None
-        self.seuravat_siirrot = set()
+        self.seuraavat_siirrot = set()
         self.siirtojen_lkm = 0
 
     def lisaa_reunat_lautaan(self):
@@ -72,14 +72,13 @@ class Ristinolla:
     def paivita_seuraavat_siirrot(self, koordinaatit):
         '''Metodi poistaa annetut koordinaatit seuraavien mahdollisten siirtojen joukosta, ja lisää annettujen
         koordinaattien tyhjät naapurit seuraavien mahdollistojen siirtojen joukkoon'''
-        if koordinaatit in self.seuravat_siirrot:
-            self.seuravat_siirrot.remove(koordinaatit)
+        if koordinaatit in self.seuraavat_siirrot:
+            self.seuraavat_siirrot.remove(koordinaatit)
         for rivi in (-1, 0, 1):
             for sarake in (-1, 0, 1):
                 if self.pelilauta[koordinaatit[0]+rivi][koordinaatit[1]+sarake] == '.':
-                    self.seuravat_siirrot.add(
+                    self.seuraavat_siirrot.add(
                         (koordinaatit[0]+rivi, koordinaatit[1]+sarake))
-
 
     def tarkista_voitto(self):
         '''Metodi tarkistaa täydentääkö viimeisin siirto pelilaudalle 5 peräkkäistä samaa
@@ -117,35 +116,34 @@ class Ristinolla:
             else:
                 pysty = 0
 
-
-        d1 = 0
+        diagonaali_1 = 0
         px = rivi - 4
         py = sarake - 4
 
         for i in range(9):
             if px > 0 and px < 26 and py > 0 and py < 26:
                 if self.pelilauta[px][py] == self.pelilauta[px+1][py+1] and self.pelilauta[px][py] != '.':
-                    d1 += 1
-                    if d1 == 4:
+                    diagonaali_1 += 1
+                    if diagonaali_1 == 4:
                         return self.pelilauta[px][py]
                 else:
-                    d1 = 0
+                    diagonaali_1 = 0
             px += 1
             py += 1
 
-        d2 = 0
+        diagonaali_2 = 0
 
         px2 = rivi + 4
-        py2 = sarake -4
+        py2 = sarake - 4
 
         for i in range(9):
             if px2 > 0 and px2 < 26 and py2 > 0 and py2 < 26:
                 if self.pelilauta[px2][py2] == self.pelilauta[px2-1][py2+1] and self.pelilauta[px2][py2] != '.':
-                    d2 += 1
-                    if d2 == 4:
+                    diagonaali_2 += 1
+                    if diagonaali_2 == 4:
                         return self.pelilauta[px2][py2]
                 else:
-                    d2 = 0
+                    diagonaali_2 = 0
             px2 -= 1
             py2 += 1
 
