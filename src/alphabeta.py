@@ -1,6 +1,6 @@
 from copy import deepcopy
 
-class Alphabeta:
+class AlphaBeta:
 
     def __init__(self):
         pass
@@ -36,7 +36,7 @@ class Alphabeta:
             if arvo >= beta:
                 break
             alpha = max(alpha, arvo)
-        print('maksimi', arvo, seuraava_siirto)
+        #print('maksimi', arvo, seuraava_siirto)
         return [arvo, seuraava_siirto]
 
     def minimi_ab(self, ristinolla, syvyys, alpha, beta):
@@ -63,5 +63,5 @@ class Alphabeta:
             if arvo <= alpha:
                 break
             beta = max(beta, arvo)
-        print('minimi', arvo, seuraava_siirto)
+        #print('minimi', arvo, seuraava_siirto)
         return [arvo, seuraava_siirto]
