@@ -12,29 +12,29 @@ class TestRistinolla(unittest.TestCase):
 
     def test_onko_siirto_sallittu(self):
         self.assertTrue(self.ristinolla.onko_sallittu_siirto((2, 3)))
-        self.ristinolla.lisaa_merkki((2, 3,))
+        self.ristinolla.lisaa_merkki((2, 3), True)
         self.assertFalse(self.ristinolla.onko_sallittu_siirto((2, 3)))
         self.assertFalse(self.ristinolla.onko_sallittu_siirto((20, 0)))
 
     def test_lisaa_merkki(self):
-        self.ristinolla.lisaa_merkki((2, 3))
+        self.ristinolla.lisaa_merkki((2, 3), True)
         self.assertEqual(self.ristinolla.pelilauta[2][3], 'X')
-        self.ristinolla.vaihda_vuoro()
-        self.ristinolla.lisaa_merkki((0, 11))
+        #self.ristinolla.vaihda_vuoro()
+        self.ristinolla.lisaa_merkki((0, 11), False)
         self.assertEqual(self.ristinolla.pelilauta[0][11], '#')
-        self.ristinolla.lisaa_merkki((1, 10))
+        self.ristinolla.lisaa_merkki((1, 10), False)
         self.assertEqual(self.ristinolla.pelilauta[1][10], '0')
 
     def test_poista_merkki(self):
-        self.ristinolla.lisaa_merkki((2, 3))
+        self.ristinolla.lisaa_merkki((2, 3), True)
         self.ristinolla.poista_merkki((2, 3))
         self.assertEqual(self.ristinolla.pelilauta[2][3], '.')
 
-    def test_vaihda_vuoro(self):
-        self.ristinolla.vaihda_vuoro()
-        self.assertFalse(self.ristinolla.maksin_vuoro)
-        self.ristinolla.vaihda_vuoro()
-        self.assertTrue(self.ristinolla.maksin_vuoro)
+    #def test_vaihda_vuoro(self):
+    #    self.ristinolla.vaihda_vuoro()
+    #    self.assertFalse(self.ristinolla.maksin_vuoro)
+    #    self.ristinolla.vaihda_vuoro()
+    #    self.assertTrue(self.ristinolla.maksin_vuoro)
 
     def test_tarkista_voitto_vaaka(self):
         self.ristinolla.pelilauta[2][3] = 'X'
@@ -77,19 +77,19 @@ class TestRistinolla(unittest.TestCase):
         self.assertEqual(self.ristinolla.tarkista_voitto(), 'kesken')
 
     def test_paivita_seuraavat_siirrot(self):
-        self.ristinolla.lisaa_merkki((2, 7))
+        self.ristinolla.lisaa_merkki((2, 7),True)
         self.ristinolla.paivita_seuraavat_siirrot((2, 7))
         self.assertEqual(len(self.ristinolla.seuraavat_siirrot), 8)
         self.assertEqual(self.ristinolla.seuraavat_siirrot, {
                          (1, 6), (1, 7), (1, 8), (2, 6), (2, 8), (3, 6), (3, 7), (3, 8)})
 
     def test_paivita_seuraavat_siirrot_useampi_merkki(self):
-        self.ristinolla.lisaa_merkki((2, 7))
+        self.ristinolla.lisaa_merkki((2, 7), True)
         self.ristinolla.paivita_seuraavat_siirrot((2, 7))
-        self.ristinolla.lisaa_merkki((3, 6))
+        self.ristinolla.lisaa_merkki((3, 6), False)
         self.ristinolla.poista_koordinaatit_seuraavista_siirroista((3,6))
         self.ristinolla.paivita_seuraavat_siirrot((3, 6))
-        self.ristinolla.lisaa_merkki((3, 7))
+        self.ristinolla.lisaa_merkki((3, 7), True)
         self.ristinolla.paivita_seuraavat_siirrot((3, 7))
         self.ristinolla.poista_koordinaatit_seuraavista_siirroista((3,7))
         self.assertEqual(len(self.ristinolla.seuraavat_siirrot), 12)

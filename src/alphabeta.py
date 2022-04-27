@@ -23,27 +23,29 @@ class AlphaBeta:
             arvo = -100
             for koordinaatit in ristinolla.seuraavat_siirrot:
                 seuraava_siirto = koordinaatit
-                ristinolla.lisaa_merkki(koordinaatit)
+                ristinolla.lisaa_merkki(koordinaatit, True)
+                ristinolla.poista_koordinaatit_seuraavista_siirroista(koordinaatit)
                 #ristinolla.tulosta_pelitilanne()
-                ristinolla.vaihda_vuoro()
+                #ristinolla.vaihda_vuoro()
                 arvo = max(arvo, self.minimax_ab(ristinolla, syvyys-1, alpha, beta, False)[0])
                 ristinolla.poista_merkki(koordinaatit)
                 if arvo > beta:
                     break
                 alpha = max(alpha, arvo)
-            #print('maksimi', arvo, seuraava_siirto)
+            print('maksimi', arvo, seuraava_siirto)
             return [arvo, seuraava_siirto]
         else:
             arvo = 100
             for koordinaatit in ristinolla.seuraavat_siirrot:
                 seuraava_siirto = koordinaatit
-                ristinolla.lisaa_merkki(koordinaatit)
+                ristinolla.lisaa_merkki(koordinaatit, False)
+                ristinolla.poista_koordinaatit_seuraavista_siirroista(koordinaatit)
                 #ristinolla.tulosta_pelitilanne()
-                ristinolla.vaihda_vuoro()
+                #ristinolla.vaihda_vuoro()
                 arvo = min(arvo, self.minimax_ab(ristinolla, syvyys-1, alpha, beta, True)[0])
                 ristinolla.poista_merkki(koordinaatit)
                 if arvo < alpha:
                     break
                 beta = min(beta, arvo)
-            #print('minimi', arvo, seuraava_siirto)
+            print('minimi', arvo, seuraava_siirto)
             return [arvo, seuraava_siirto]

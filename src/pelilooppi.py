@@ -14,21 +14,23 @@ class Pelilooppi:
         while True:
             pelaajan_siirto = self.kysy_pelaajan_siirto()
             if self.ristinolla.onko_sallittu_siirto(pelaajan_siirto) is True:
-                self.ristinolla.lisaa_merkki(pelaajan_siirto)
+                self.ristinolla.lisaa_merkki(pelaajan_siirto, False)
                 self.ristinolla.tulosta_pelitilanne()
                 if self.ristinolla.tarkista_voitto() != 'kesken':
                     break
                 self.ristinolla.paivita_seuraavat_siirrot(pelaajan_siirto)
-                self.ristinolla.vaihda_vuoro()
+                self.ristinolla.poista_koordinaatit_seuraavista_siirroista(pelaajan_siirto)
+                #self.ristinolla.vaihda_vuoro()
                 botin_siirto = self.botti.minimax_ab(
                     self.ristinolla, 3, -100, 100, True)[1]
                 print('botin siirto', botin_siirto)
-                self.ristinolla.lisaa_merkki(botin_siirto)
+                self.ristinolla.lisaa_merkki(botin_siirto, True)
                 self.ristinolla.tulosta_pelitilanne()
                 if self.ristinolla.tarkista_voitto() != 'kesken':
                     break
                 self.ristinolla.paivita_seuraavat_siirrot(botin_siirto)
-                self.ristinolla.vaihda_vuoro()
+                self.ristinolla.poista_koordinaatit_seuraavista_siirroista(botin_siirto)
+                #self.ristinolla.vaihda_vuoro()
             else:
                 print('Ruutu on jo pelattu. Kokeile toista ruutua.')
 

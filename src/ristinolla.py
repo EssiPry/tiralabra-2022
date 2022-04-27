@@ -35,8 +35,9 @@ class Ristinolla:
             return True
         return False
 
-    def lisaa_merkki(self, koordinaatit):
+    def lisaa_merkki(self, koordinaatit, vuoro):
         ''' Metodi lisää merkin X tai 0 pelaajan tai botin antamiin koordinaatteihin.'''
+        self.maksin_vuoro = vuoro
         rivi = koordinaatit[0]
         sarake = koordinaatit[1]
         if self.pelilauta[rivi][sarake] == '.':
@@ -62,12 +63,12 @@ class Ristinolla:
         else:
             self.minin_siirto = koordinaatit
 
-    def vaihda_vuoro(self):
-        '''Metodi vaihtaa pelaajavuoron '''
-        if self.maksin_vuoro is True:
-            self.maksin_vuoro = False
-        else:
-            self.maksin_vuoro = True
+   #def vaihda_vuoro(self):
+   #     '''Metodi vaihtaa pelaajavuoron '''
+   #    if self.maksin_vuoro is True:
+   #         self.maksin_vuoro = False
+   #     else:
+   #         self.maksin_vuoro = True
 
     def paivita_seuraavat_siirrot(self, koordinaatit):
         '''Metodi lisää annettujen koordinaattien tyhjät naapurit seuraavien
