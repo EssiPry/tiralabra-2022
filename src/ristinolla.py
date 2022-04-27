@@ -4,10 +4,7 @@ class Ristinolla:
         '''Luokan konstruktori'''
         self.pelilauta = [['.' for x in range(27)]for y in range(27)]
         self.maksin_vuoro = False
-        self.maksin_siirto = None
-        self.minin_siirto = None
-        self.seuraavat_siirrot = set()
-        self.siirtojen_lkm = 0
+        #self.seuraavat_siirrot = set()
 
     def lisaa_reunat_lautaan(self):
         '''Metodi lisää pelilautaan #-reunat'''
@@ -35,70 +32,29 @@ class Ristinolla:
             return True
         return False
 
-    def lisaa_merkki(self, koordinaatit, vuoro):
-        ''' Metodi lisää merkin X tai 0 pelaajan tai botin antamiin koordinaatteihin.'''
-        self.maksin_vuoro = vuoro
-        rivi = koordinaatit[0]
-        sarake = koordinaatit[1]
-        if self.pelilauta[rivi][sarake] == '.':
-            if self.maksin_vuoro:
-                self.pelilauta[rivi][sarake] = 'X'
-            else:
-                self.pelilauta[rivi][sarake] = '0'
-            self.paivita_viimeisin_siirto(koordinaatit)
-            self.siirtojen_lkm += 1
-
-    def poista_merkki(self, koordinaatit):
-        '''Metodi muuttaa annetut koordinaatit tyhjäksi (.) eli poistaa merkin.'''
-        rivi = koordinaatit[0]
-        sarake = koordinaatit[1]
-        if self.pelilauta[rivi][sarake] != '#':
-            self.pelilauta[rivi][sarake] = '.'
-            self.siirtojen_lkm -= 1
-
-    def paivita_viimeisin_siirto(self, koordinaatit):
-        '''Metodi päivittää pelaajan tai botin viimeisimmän siirron ristinolla-olioon'''
-        if self.maksin_vuoro:
-            self.maksin_siirto = koordinaatit
-        else:
-            self.minin_siirto = koordinaatit
-
-   #def vaihda_vuoro(self):
-   #     '''Metodi vaihtaa pelaajavuoron '''
-   #    if self.maksin_vuoro is True:
-   #         self.maksin_vuoro = False
-   #     else:
-   #         self.maksin_vuoro = True
-
-    def paivita_seuraavat_siirrot(self, koordinaatit):
+    def paivita_seuraavat_siirrot(self, koordinaatit, siirrot):
         '''Metodi lisää annettujen koordinaattien tyhjät naapurit seuraavien
-        mahdollistojen siirtojen joukkoon'''
+        mahdollistojen siirtojen joukkoon.
+        Palauttaa seuraavat siirrot settinä. '''
         for rivi in (-1, 0, 1):
             for sarake in (-1, 0, 1):
                 if self.pelilauta[koordinaatit[0]+rivi][koordinaatit[1]+sarake] == '.':
-                    self.seuraavat_siirrot.add(
+                    siirrot.add(
                         (koordinaatit[0]+rivi, koordinaatit[1]+sarake))
 
-    def poista_koordinaatit_seuraavista_siirroista(self, koordinaatit):
+    def poista_koordinaatit_seuraavista_siirroista(self, koordinaatit, siirrot):
         '''Metodi poistaa annetut koordinaatit seuraavien mahdollisten siirtojen joukosta'''
-        if koordinaatit in self.seuraavat_siirrot:
-            self.seuraavat_siirrot.remove(koordinaatit)
+        if koordinaatit in siirrot:
+            siirrot.remove(koordinaatit)
 
-    def lisaa_koordinaatit_seuraaviin_siirtoihin(self, koordinaatit):
-        '''Metodi lisää annetut koordinatti seuraavien mahdollisten siirtojen joukkoon'''
-        self.seuraavat_siirrot.add(koordinaatit)
+    def lisaa_koordinaatit_seuraaviin_siirtoihin(self, koordinaatit, siirrot):
+        '''Metodi lisää annetut koordinaatit seuraavien mahdollisten siirtojen joukkoon'''
+        siirrot.add(koordinaatit)
 
-    def tarkista_voitto(self):
+    def tarkista_voitto(self, rivi, sarake):
         '''Metodi tarkistaa täydentääkö viimeisin siirto pelilaudalle 5 peräkkäistä samaa
         merkkiä eli voittaako siirto pelin. Metodi palauttaa voittavan stringin merkin, tai tekstin tasapeli
         '''
-
-        if self.maksin_vuoro and self.maksin_siirto is not None:
-            rivi = self.maksin_siirto[0]
-            sarake = self.maksin_siirto[1]
-        else:
-            rivi = self.minin_siirto[0]
-            sarake = self.minin_siirto[1]
 
         eka_rivi = max(rivi-4, 1)
         eka_sarake = max(sarake-4, 1)
@@ -155,7 +111,7 @@ class Ristinolla:
             px2 -= 1
             py2 += 1
 
-        if self.siirtojen_lkm == 625:
-            return 'tasapeli'
+        #if self.siirtojen_lkm == 625:
+        #    return 'tasapeli'
 
         return 'kesken'

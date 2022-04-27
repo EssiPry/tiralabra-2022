@@ -4,33 +4,39 @@ class Pelilooppi:
         '''Luokan konstruktori'''
         self.ristinolla = ristinolla
         self.botti = alphabeta
+        self.siirtojen_lkm = -1
 
     def aloita_peli(self):
         '''Metodi aloittaa ristinolla peli ja pyörittää pelilooppia
         kunnes peli loppuu. '''
 
         self.ristinolla.lisaa_reunat_lautaan()
+        mahdolliset_siirrot = set()
         print('Tervetuloa pelamaan ristinollaa.')
         while True:
             pelaajan_siirto = self.kysy_pelaajan_siirto()
             if self.ristinolla.onko_sallittu_siirto(pelaajan_siirto) is True:
-                self.ristinolla.lisaa_merkki(pelaajan_siirto, False)
+                self.ristinolla.pelilauta[pelaajan_siirto[0]][pelaajan_siirto[1]] = '0'
                 self.ristinolla.tulosta_pelitilanne()
-                if self.ristinolla.tarkista_voitto() != 'kesken':
+                if self.ristinolla.tarkista_voitto(pelaajan_siirto[0],pelaajan_siirto[1]) != 'kesken':
                     break
-                self.ristinolla.paivita_seuraavat_siirrot(pelaajan_siirto)
-                self.ristinolla.poista_koordinaatit_seuraavista_siirroista(pelaajan_siirto)
-                #self.ristinolla.vaihda_vuoro()
+                self.siirtojen_lkm += 2
+                if self.siirtojen_lkm == 625:
+                    print('tasapeli')
+                    break
+                self.ristinolla.poista_koordinaatit_seuraavista_siirroista(pelaajan_siirto, mahdolliset_siirrot)
+                self.ristinolla.paivita_seuraavat_siirrot(pelaajan_siirto, mahdolliset_siirrot)
+                print(mahdolliset_siirrot)
+                klooni_siirrot = set(mahdolliset_siirrot)
                 botin_siirto = self.botti.minimax_ab(
-                    self.ristinolla, 3, -100, 100, True)[1]
+                    self.ristinolla, 3, -100, 100, True, pelaajan_siirto, klooni_siirrot)[1]
                 print('botin siirto', botin_siirto)
-                self.ristinolla.lisaa_merkki(botin_siirto, True)
+                self.ristinolla.pelilauta[botin_siirto[0]][botin_siirto[1]] = 'X'
                 self.ristinolla.tulosta_pelitilanne()
-                if self.ristinolla.tarkista_voitto() != 'kesken':
+                if self.ristinolla.tarkista_voitto(botin_siirto[0], botin_siirto[1]) != 'kesken':
                     break
-                self.ristinolla.paivita_seuraavat_siirrot(botin_siirto)
-                self.ristinolla.poista_koordinaatit_seuraavista_siirroista(botin_siirto)
-                #self.ristinolla.vaihda_vuoro()
+                self.ristinolla.poista_koordinaatit_seuraavista_siirroista(botin_siirto, mahdolliset_siirrot)
+                self.ristinolla.paivita_seuraavat_siirrot(botin_siirto, mahdolliset_siirrot)
             else:
                 print('Ruutu on jo pelattu. Kokeile toista ruutua.')
 
