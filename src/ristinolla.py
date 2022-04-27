@@ -70,15 +70,22 @@ class Ristinolla:
             self.maksin_vuoro = True
 
     def paivita_seuraavat_siirrot(self, koordinaatit):
-        '''Metodi poistaa annetut koordinaatit seuraavien mahdollisten siirtojen joukosta, ja lisää annettujen
-        koordinaattien tyhjät naapurit seuraavien mahdollistojen siirtojen joukkoon'''
-        if koordinaatit in self.seuraavat_siirrot:
-            self.seuraavat_siirrot.remove(koordinaatit)
+        '''Metodi lisää annettujen koordinaattien tyhjät naapurit seuraavien
+        mahdollistojen siirtojen joukkoon'''
         for rivi in (-1, 0, 1):
             for sarake in (-1, 0, 1):
                 if self.pelilauta[koordinaatit[0]+rivi][koordinaatit[1]+sarake] == '.':
                     self.seuraavat_siirrot.add(
                         (koordinaatit[0]+rivi, koordinaatit[1]+sarake))
+
+    def poista_koordinaatit_seuraavista_siirroista(self, koordinaatit):
+        '''Metodi poistaa annetut koordinaatit seuraavien mahdollisten siirtojen joukosta'''
+        if koordinaatit in self.seuraavat_siirrot:
+            self.seuraavat_siirrot.remove(koordinaatit)
+
+    def lisaa_koordinaatit_seuraaviin_siirtoihin(self, koordinaatit):
+        '''Metodi lisää annetut koordinatti seuraavien mahdollisten siirtojen joukkoon'''
+        self.seuraavat_siirrot.add(koordinaatit)
 
     def tarkista_voitto(self):
         '''Metodi tarkistaa täydentääkö viimeisin siirto pelilaudalle 5 peräkkäistä samaa

@@ -82,11 +82,16 @@ class TestRistinolla(unittest.TestCase):
         self.assertEqual(len(self.ristinolla.seuraavat_siirrot), 8)
         self.assertEqual(self.ristinolla.seuraavat_siirrot, {
                          (1, 6), (1, 7), (1, 8), (2, 6), (2, 8), (3, 6), (3, 7), (3, 8)})
+
+    def test_paivita_seuraavat_siirrot_useampi_merkki(self):
+        self.ristinolla.lisaa_merkki((2, 7))
+        self.ristinolla.paivita_seuraavat_siirrot((2, 7))
         self.ristinolla.lisaa_merkki((3, 6))
+        self.ristinolla.poista_koordinaatit_seuraavista_siirroista((3,6))
         self.ristinolla.paivita_seuraavat_siirrot((3, 6))
-        self.assertEqual(len(self.ristinolla.seuraavat_siirrot), 12)
         self.ristinolla.lisaa_merkki((3, 7))
         self.ristinolla.paivita_seuraavat_siirrot((3, 7))
+        self.ristinolla.poista_koordinaatit_seuraavista_siirroista((3,7))
         self.assertEqual(len(self.ristinolla.seuraavat_siirrot), 12)
         self.assertEqual(self.ristinolla.seuraavat_siirrot, {(1, 6), (1, 7), (1, 8), (
             2, 5), (2, 6), (2, 8), (3, 5), (3, 8), (4, 5), (4, 6), (4, 7), (4, 8)})
