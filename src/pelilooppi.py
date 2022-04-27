@@ -21,7 +21,7 @@ class Pelilooppi:
                 self.ristinolla.paivita_seuraavat_siirrot(pelaajan_siirto)
                 self.ristinolla.vaihda_vuoro()
                 botin_siirto = self.botti.minimax_ab(
-                    self.ristinolla, 3, -100, 100)[1]
+                    self.ristinolla, 3, -100, 100, True)[1]
                 print('botin siirto', botin_siirto)
                 self.ristinolla.lisaa_merkki(botin_siirto)
                 self.ristinolla.tulosta_pelitilanne()
