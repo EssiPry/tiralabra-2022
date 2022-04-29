@@ -59,7 +59,7 @@ class TestRistinolla(unittest.TestCase):
     def test_paivita_seuraavat_siirrot(self):
         siirrot = set()
         self.ristinolla.pelilauta[2][7] = 'X'
-        self.ristinolla.paivita_seuraavat_siirrot((2, 7), siirrot)
+        self.ristinolla.paivita_mahdolliset_siirrot((2, 7), siirrot)
         self.assertEqual(len(siirrot), 8)
         self.assertEqual(siirrot, {
                          (1, 6), (1, 7), (1, 8), (2, 6), (2, 8), (3, 6), (3, 7), (3, 8)})

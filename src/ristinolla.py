@@ -32,7 +32,7 @@ class Ristinolla:
             return True
         return False
 
-    def paivita_seuraavat_siirrot(self, koordinaatit, siirrot):
+    def paivita_mahdolliset_siirrot(self, koordinaatit, siirrot):
         '''Metodi lisää annettujen koordinaattien tyhjät naapurit seuraavien
         mahdollistojen siirtojen joukkoon.
         Palauttaa seuraavat siirrot settinä. '''
@@ -41,15 +41,6 @@ class Ristinolla:
                 if self.pelilauta[koordinaatit[0]+rivi][koordinaatit[1]+sarake] == '.':
                     siirrot.add(
                         (koordinaatit[0]+rivi, koordinaatit[1]+sarake))
-
-    def poista_koordinaatit_seuraavista_siirroista(self, koordinaatit, siirrot):
-        '''Metodi poistaa annetut koordinaatit seuraavien mahdollisten siirtojen joukosta'''
-        if koordinaatit in siirrot:
-            siirrot.remove(koordinaatit)
-
-    def lisaa_koordinaatit_seuraaviin_siirtoihin(self, koordinaatit, siirrot):
-        '''Metodi lisää annetut koordinaatit seuraavien mahdollisten siirtojen joukkoon'''
-        siirrot.add(koordinaatit)
 
     def tarkista_voitto(self, rivi, sarake):
         '''Metodi tarkistaa täydentääkö viimeisin siirto pelilaudalle 5 peräkkäistä samaa
