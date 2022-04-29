@@ -1,6 +1,7 @@
 import unittest
 from ristinolla import Ristinolla
 
+
 class TestRistinolla(unittest.TestCase):
     def setUp(self):
         self.ristinolla = Ristinolla()
@@ -22,9 +23,9 @@ class TestRistinolla(unittest.TestCase):
         self.ristinolla.pelilauta[2][5] = 'X'
         self.ristinolla.pelilauta[2][6] = 'X'
         self.ristinolla.pelilauta[2][7] = 'X'
-        self.assertEqual(self.ristinolla.tarkista_voitto(2,7), 'X')
+        self.assertEqual(self.ristinolla.tarkista_voitto(2, 7), 'X')
         self.ristinolla.pelilauta[2][6] = '0'
-        self.assertEqual(self.ristinolla.tarkista_voitto(2,7), 'kesken')
+        self.assertEqual(self.ristinolla.tarkista_voitto(2, 7), 'kesken')
 
     def test_tarkista_voitto_pysty(self):
         self.ristinolla.pelilauta[1][7] = 'X'
@@ -32,9 +33,9 @@ class TestRistinolla(unittest.TestCase):
         self.ristinolla.pelilauta[3][7] = 'X'
         self.ristinolla.pelilauta[4][7] = 'X'
         self.ristinolla.pelilauta[5][7] = 'X'
-        self.assertEqual(self.ristinolla.tarkista_voitto(5,7), 'X')
+        self.assertEqual(self.ristinolla.tarkista_voitto(5, 7), 'X')
         self.ristinolla.pelilauta[1][7] = '0'
-        self.assertEqual(self.ristinolla.tarkista_voitto(5,7), 'kesken')
+        self.assertEqual(self.ristinolla.tarkista_voitto(5, 7), 'kesken')
 
     def test_tarkista_voitto_d1(self):
         self.ristinolla.pelilauta[1][6] = 'X'
@@ -42,9 +43,9 @@ class TestRistinolla(unittest.TestCase):
         self.ristinolla.pelilauta[3][8] = 'X'
         self.ristinolla.pelilauta[4][9] = 'X'
         self.ristinolla.pelilauta[5][10] = 'X'
-        self.assertEqual(self.ristinolla.tarkista_voitto(5,10), 'X')
+        self.assertEqual(self.ristinolla.tarkista_voitto(5, 10), 'X')
         self.ristinolla.pelilauta[5][10] = '0'
-        self.assertEqual(self.ristinolla.tarkista_voitto(5,10), 'kesken')
+        self.assertEqual(self.ristinolla.tarkista_voitto(5, 10), 'kesken')
 
     def test_tarkista_voitto_d2(self):
         self.ristinolla.pelilauta[5][4] = 'X'
@@ -52,9 +53,9 @@ class TestRistinolla(unittest.TestCase):
         self.ristinolla.pelilauta[3][6] = 'X'
         self.ristinolla.pelilauta[2][7] = 'X'
         self.ristinolla.pelilauta[1][8] = 'X'
-        self.assertEqual(self.ristinolla.tarkista_voitto(1,8), 'X')
+        self.assertEqual(self.ristinolla.tarkista_voitto(1, 8), 'X')
         self.ristinolla.pelilauta[3][6] = '0'
-        self.assertEqual(self.ristinolla.tarkista_voitto(1,8), 'kesken')
+        self.assertEqual(self.ristinolla.tarkista_voitto(1, 8), 'kesken')
 
     def test_paivita_seuraavat_siirrot(self):
         siirrot = set()

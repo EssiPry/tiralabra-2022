@@ -1,5 +1,6 @@
 import random
 
+
 class Pelilooppi:
 
     def __init__(self, ristinolla, alphabeta):
@@ -18,10 +19,11 @@ class Pelilooppi:
         while True:
             pelaajan_siirto = self.kysy_pelaajan_siirto()
             if self.ristinolla.onko_sallittu_siirto(pelaajan_siirto) is True:
-                self.ristinolla.pelilauta[pelaajan_siirto[0]][pelaajan_siirto[1]] = '0'
+                self.ristinolla.pelilauta[pelaajan_siirto[0]
+                                          ][pelaajan_siirto[1]] = '0'
                 print('pelaajan siirto', pelaajan_siirto)
                 self.ristinolla.tulosta_pelitilanne()
-                if self.ristinolla.tarkista_voitto(pelaajan_siirto[0],pelaajan_siirto[1]) != 'kesken':
+                if self.ristinolla.tarkista_voitto(pelaajan_siirto[0], pelaajan_siirto[1]) != 'kesken':
                     break
                 self.siirtojen_lkm += 2
                 if self.siirtojen_lkm == 625:
@@ -29,19 +31,22 @@ class Pelilooppi:
                     break
                 if pelaajan_siirto in mahdolliset_siirrot:
                     mahdolliset_siirrot.remove(pelaajan_siirto)
-                self.ristinolla.paivita_mahdolliset_siirrot(pelaajan_siirto, mahdolliset_siirrot)
+                self.ristinolla.paivita_mahdolliset_siirrot(
+                    pelaajan_siirto, mahdolliset_siirrot)
 
                 botin_siirto = self.botti.minimax_ab(
                     self.ristinolla, 3, -100, 100, True, pelaajan_siirto, mahdolliset_siirrot)[1]
                 if botin_siirto == 0:
                     botin_siirto = random.choice(tuple(mahdolliset_siirrot))
                 print('botin siirto', botin_siirto)
-                self.ristinolla.pelilauta[botin_siirto[0]][botin_siirto[1]] = 'X'
+                self.ristinolla.pelilauta[botin_siirto[0]
+                                          ][botin_siirto[1]] = 'X'
                 self.ristinolla.tulosta_pelitilanne()
                 if self.ristinolla.tarkista_voitto(botin_siirto[0], botin_siirto[1]) != 'kesken':
                     break
                 mahdolliset_siirrot.remove(botin_siirto)
-                self.ristinolla.paivita_mahdolliset_siirrot(botin_siirto, mahdolliset_siirrot)
+                self.ristinolla.paivita_mahdolliset_siirrot(
+                    botin_siirto, mahdolliset_siirrot)
             else:
                 print('Ruutu on jo pelattu. Kokeile toista ruutua.')
 

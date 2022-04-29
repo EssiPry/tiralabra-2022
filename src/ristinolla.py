@@ -41,10 +41,12 @@ class Ristinolla:
                 if self.pelilauta[koordinaatit[0]+rivi][koordinaatit[1]+sarake] == '.':
                     siirrot.add(
                         (koordinaatit[0]+rivi, koordinaatit[1]+sarake))
+        return siirrot
 
     def tarkista_voitto(self, rivi, sarake):
         '''Metodi tarkistaa täydentääkö viimeisin siirto pelilaudalle 5 peräkkäistä samaa
-        merkkiä eli voittaako siirto pelin. Metodi palauttaa voittavan stringin merkin, tai tekstin tasapeli
+        merkkiä eli voittaako siirto pelin. Metodi palauttaa voittavan merkin(str), tai tekstin kesken
+        jos kumpikaan ei voita.
         '''
 
         eka_rivi = max(rivi-4, 1)
@@ -102,7 +104,7 @@ class Ristinolla:
             px2 -= 1
             py2 += 1
 
-        #if self.siirtojen_lkm == 625:
+        # if self.siirtojen_lkm == 625:
         #    return 'tasapeli'
 
         return 'kesken'
