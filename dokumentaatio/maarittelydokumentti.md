@@ -2,7 +2,7 @@
 
 #### Projekti - Ristinolla
 
-Projektin tarkoituksena on kehittää tekoäly, jota vastaan voi pelata ristinollaa 5x5 pelilaudalla. Ristinollassa pelaaja ja tekoäly asettavat pelilaudalle vuorotellen oman merkkinsä X tai 0. Se kumpi saa ensin viiden suoran voittaa pelin.
+Projektin tarkoituksena on kehittää tekoäly, jota vastaan voi pelata ristinollaa 25x25 pelilaudalla. Ristinollassa pelaaja ja tekoäly asettavat pelilaudalle vuorotellen oman merkkinsä X tai 0. Se kumpi saa ensin viiden suoran voittaa pelin.
 
 Tekoälyn valitsee optimaalisen siirron käyttämällä minimax-algoritmia, jota tehostetaan alpha-beta -karsinnalla. Algoritmi saa syötteenä sen hetkisen pelitilanteen. Sen hetkinen pelitilannetta ajatellaan puun juurena. Algoritmi käy läpi mahdollisia siirtoja tiettyyn syvyyteen asti, arvioi eri mahdolliset pelitilanteet ja valitsee niistä mahdollisimman hyvältä vaikuttavan tuloksen. Algoritmin toimimisen oletuksena on, että pelaaja asettaa merkkinsä pelilaudalle mahdollisimman hyvin. Jos pelajaa asettaa merkkinsä satunnaisesti, algoritmi ei toimi kovin hyvin.
 

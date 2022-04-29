@@ -2,12 +2,11 @@
 
 ### Testikattavuus
 
-tähän tulee testikattavuus kuva.
+tähän tulee kuva testikattavuus-raportista.
 
 ### Testaus
 
-Yksikkötestit kattavat tällä hetkellä ristinolla -luokan. Alphabeta-luokkaa on toistaiseksi testattu vain manuaalisesti.
-
+Ristinolla- ja alphabeta-luokkia on testattu yksikkötesteilla. Alphabeta-luokassa on toistaiseksi vasta yksi testi, näitä on tarkoitus lisätä. Yksikkötestien lisäksi Alphabeta-luokkaa on testattu manuaalisesti (vaihtelevin tuloksin) pelaamalla bottia vastaan.
 
 ### Testin suorittaminen
 
