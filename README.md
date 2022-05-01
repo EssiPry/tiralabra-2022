@@ -1,6 +1,6 @@
 ## Tietorakenteet ja algoritmit harjoitustyö
 
-Ristinolla 25x25 ruudukolla. Peli on vielä kesken ja sitä voi tällä hetkellä pelata eri tyhmää bottia vastaan (hyvänmielen peli). Pelaaja on 0 ja botti on X.
+Ristinolla 25x25 ruudukolla. Peli on vielä kesken ja sitä voi tällä hetkellä pelata melko tyhmää bottia vastaan. Pelaaja on 0 ja botti on X.
 
 ### Dokumentaatio
 
@@ -15,3 +15,4 @@ Ristinolla 25x25 ruudukolla. Peli on vielä kesken ja sitä voi tällä hetkell�
 * [Viikkoraportti 3](https://github.com/EssiPry/tiralabra-2022/blob/main/dokumentaatio/viikkoraportit/Viikkoraportti3.md)
 * [Viikkoraportti 4](https://github.com/EssiPry/tiralabra-2022/blob/main/dokumentaatio/viikkoraportit/Viikkoraportti4.md)
 * [Viikkoraportti 5](https://github.com/EssiPry/tiralabra-2022/blob/main/dokumentaatio/viikkoraportit/Viikkoraportti5.md)
+* [Viikkoraportti 6](https://github.com/EssiPry/tiralabra-2022/blob/main/dokumentaatio/viikkoraportit/Viikkoraportti6.md)
