@@ -4,16 +4,17 @@ class AlphaBeta:
         pass
 
     def minimax_ab(self, ristinolla, syvyys, alpha, beta, vuoro, viimeisin_siirto, siirrot):
-        '''Minimax-algoritmi alpha-beta-karsinnalla
+        '''Minimax-algoritmi alpha-beta-karsinnalla. Palauttaa annetun siirron arvon.
         '''
+
         loppu = ristinolla.tarkista_voitto(
             viimeisin_siirto[0], viimeisin_siirto[1])
         if loppu == 'X':
-            return 10, 0
+            return 10
         if loppu == '0':
-            return -10, 0
+            return -10
         if syvyys == 0:
-            return 0, 0
+            return 0
 
         if vuoro is True:
             arvo = -100
@@ -23,16 +24,18 @@ class AlphaBeta:
                 klooni_siirrot.remove(koordinaatit)
                 ristinolla.paivita_mahdolliset_siirrot(
                     koordinaatit, klooni_siirrot)
-                vertailu, seuraava_siirto = self.minimax_ab(
+                vertailu = self.minimax_ab(
                     ristinolla, syvyys-1, alpha, beta, False, koordinaatit, klooni_siirrot)
                 arvo = max(arvo, vertailu)
+                alpha = max(alpha, arvo)
                 ristinolla.pelilauta[koordinaatit[0]][koordinaatit[1]] = '.'
                 klooni_siirrot.add(koordinaatit)
+                #print('max', 'arvo', arvo, 'alpha', alpha, 'beta', beta)
                 if arvo > beta:
-                    seuraava_siirto = koordinaatit
+                    #print('max', 'arvo', arvo, 'alpha', alpha, 'beta', beta)
                     break
-                alpha = max(alpha, arvo)
-            return [arvo, seuraava_siirto]
+                #print('maksimi', 'alpha', alpha, 'beta', beta,'arvo', arvo, 'siirto', seuraava_siirto)
+            return arvo
 
         arvo = 100
         for koordinaatit in siirrot:
@@ -41,13 +44,15 @@ class AlphaBeta:
             klooni_siirrot.remove(koordinaatit)
             ristinolla.paivita_mahdolliset_siirrot(
                 koordinaatit, klooni_siirrot)
-            vertailu, seuraava_siirto = self.minimax_ab(
-                ristinolla, syvyys-1, alpha, beta, False, koordinaatit, klooni_siirrot)
+            vertailu = self.minimax_ab(
+                ristinolla, syvyys-1, alpha, beta, True, koordinaatit, klooni_siirrot)
             arvo = min(arvo, vertailu)
+            beta = min(beta, arvo)
             ristinolla.pelilauta[koordinaatit[0]][koordinaatit[1]] = '.'
             klooni_siirrot.add(koordinaatit)
+            #print('min', 'arvo', arvo, 'alpha', alpha, 'beta', beta)
             if arvo < alpha:
-                seuraava_siirto = koordinaatit
+                #print('arvo', arvo, 'alpha', alpha)
                 break
-            beta = min(beta, arvo)
-        return [arvo, seuraava_siirto]
+            #print('minimi', 'alpha', alpha, 'beta', beta, 'arvo', arvo, 'siirto', seuraava_siirto)
+        return arvo

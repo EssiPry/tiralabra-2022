@@ -20,7 +20,28 @@ class TestAlphaBeta(unittest.TestCase):
         self.siirrot.remove((4,7))
         self.ristinolla.paivita_mahdolliset_siirrot((4,7), self.siirrot)
 
+    def test_minimax_ab_minin_vuoro(self):
+        arvo = 100
+        for siirto in self.siirrot:
+            self.ristinolla.pelilauta[siirto[0]][siirto[1]] = '0'
+            siirron_arvo =  self.botti.minimax_ab(self.ristinolla, 3, -100, 100, True, siirto, self.siirrot)
+            if siirron_arvo < arvo:
+                arvo = siirron_arvo
+                seuraava_siirto = siirto
+                if arvo == -10:
+                    break
+            self.ristinolla.pelilauta[siirto[0]][siirto[1]] = '.'
+        self.assertEqual(arvo, (-10))
 
-    def test_minimax_ab(self):
-        seuraava_siirto = self.botti.minimax_ab(self.ristinolla, 2, -100, 100, True, (4,7), self.siirrot)[1]
-        self.assertEqual(seuraava_siirto, (5,7))
+    def test_minimax_ab_maxin_vuoro(self):
+        arvo = -100
+        for siirto in self.siirrot:
+            self.ristinolla.pelilauta[siirto[0]][siirto[1]] = 'X'
+            siirron_arvo =  self.botti.minimax_ab(self.ristinolla, 3, -100, 100, True, siirto, self.siirrot)
+            if siirron_arvo > arvo:
+                arvo = siirron_arvo
+                seuraava_siirto = siirto
+                if arvo == 10:
+                    break
+            self.ristinolla.pelilauta[siirto[0]][siirto[1]] = '.'
+        self.assertEqual(arvo, (0))
