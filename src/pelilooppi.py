@@ -10,7 +10,7 @@ class Pelilooppi:
         self.siirtojen_lkm = -1
 
     def aloita_peli(self):
-        '''Metodi aloittaa ristinolla peli ja pyörittää pelilooppia
+        '''Metodi aloittaa ristinollapelin ja pyörittää pelilooppia
         kunnes peli loppuu. '''
 
         self.ristinolla.lisaa_reunat_lautaan()
@@ -34,10 +34,23 @@ class Pelilooppi:
                 self.ristinolla.paivita_mahdolliset_siirrot(
                     pelaajan_siirto, mahdolliset_siirrot)
 
-                botin_siirto = self.botti.minimax_ab(
-                    self.ristinolla, 3, -100, 100, True, pelaajan_siirto, mahdolliset_siirrot)[1]
-                if botin_siirto == 0:
-                    botin_siirto = random.choice(tuple(mahdolliset_siirrot))
+
+                #tästä alkaa botin(max) siirto
+                arvo = -100
+
+                for koordinaatit in mahdolliset_siirrot:
+                    self.ristinolla.pelilauta[koordinaatit[0]
+                                          ][koordinaatit[1]] = 'X'
+                    siirron_arvo = self.botti.minimax_ab(
+                    self.ristinolla, 3, -100, 100, True, koordinaatit, mahdolliset_siirrot)
+                    if siirron_arvo > arvo:
+                        arvo = siirron_arvo
+                        botin_siirto = koordinaatit
+                        if arvo == 10:
+                            break
+                    self.ristinolla.pelilauta[koordinaatit[0]
+                                          ][koordinaatit[1]] = '.'
+
                 print('botin siirto', botin_siirto)
                 self.ristinolla.pelilauta[botin_siirto[0]
                                           ][botin_siirto[1]] = 'X'
