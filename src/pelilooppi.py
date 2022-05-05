@@ -42,7 +42,8 @@ class Pelilooppi:
                     self.ristinolla.pelilauta[koordinaatit[0]
                                           ][koordinaatit[1]] = 'X'
                     siirron_arvo = self.botti.minimax_ab(
-                    self.ristinolla, 3, -100, 100, True, koordinaatit, mahdolliset_siirrot)
+                    self.ristinolla, 3, -100, 100, False, koordinaatit, mahdolliset_siirrot)
+                    print(koordinaatit, 'siirron arvo', siirron_arvo)
                     if siirron_arvo > arvo:
                         arvo = siirron_arvo
                         botin_siirto = koordinaatit
