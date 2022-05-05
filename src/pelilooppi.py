@@ -41,10 +41,12 @@ class Pelilooppi:
                 for koordinaatit in mahdolliset_siirrot:
                     self.ristinolla.pelilauta[koordinaatit[0]
                                           ][koordinaatit[1]] = 'X'
-                    mahdolliset_siirrot.remove(koordinaatit)
+                    kloonisiirrot = set(mahdolliset_siirrot)
+                    kloonisiirrot.remove(koordinaatit)
+                    self.ristinolla.paivita_mahdolliset_siirrot(koordinaatit, kloonisiirrot)
                     siirron_arvo = self.botti.minimax_ab(
-                    self.ristinolla, 3, -100, 100, False, koordinaatit, mahdolliset_siirrot)
-                    mahdolliset_siirrot.add(koordinaatit)
+                    self.ristinolla, 3, -100, 100, False, koordinaatit, kloonisiirrot)
+                    kloonisiirrot.add(koordinaatit)
                     print(koordinaatit, 'siirron arvo', siirron_arvo)
                     if siirron_arvo > arvo:
                         arvo = siirron_arvo
