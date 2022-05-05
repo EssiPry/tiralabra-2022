@@ -37,7 +37,6 @@ class AlphaBeta:
                 arvo = max(arvo, vertailu)
                 #print('max poistokoordinaatit', koordinaatit)
                 ristinolla.pelilauta[koordinaatit[0]][koordinaatit[1]] = '.'
-                klooni_siirrot.add(koordinaatit)
                 #print('max', 'arvo', arvo, 'alpha', alpha, 'beta', beta)
                 if arvo > beta:
                     #print('max', 'arvo', arvo, 'alpha', alpha, 'beta', beta)
@@ -48,6 +47,7 @@ class AlphaBeta:
 
         else:
             arvo = 100
+
             for koordinaatit in siirrot:
                 klooni_siirrot = set(siirrot)
                 #print('min lisäyskoordinaatit', koordinaatit)
@@ -61,7 +61,6 @@ class AlphaBeta:
                 arvo = min(arvo, vertailu)
                 #print('min poistokoordinaatit', koordinaatit)
                 ristinolla.pelilauta[koordinaatit[0]][koordinaatit[1]] = '.'
-                klooni_siirrot.add(koordinaatit)
                 #print('min', 'arvo', arvo, 'alpha', alpha, 'beta', beta)
                 if arvo < alpha:
                     #print('arvo', arvo, 'alpha', alpha)
