@@ -24,10 +24,9 @@ class TestAlphaBeta(unittest.TestCase):
         arvo = 100
         for siirto in self.siirrot:
             self.ristinolla.pelilauta[siirto[0]][siirto[1]] = '0'
-            siirron_arvo =  self.botti.minimax_ab(self.ristinolla, 3, -100, 100, True, siirto, self.siirrot)
+            siirron_arvo =  self.botti.minimax_ab(self.ristinolla, 4, -100, 100, True, siirto, self.siirrot)
             if siirron_arvo < arvo:
                 arvo = siirron_arvo
-                seuraava_siirto = siirto
                 if arvo == -10:
                     break
             self.ristinolla.pelilauta[siirto[0]][siirto[1]] = '.'
@@ -41,14 +40,10 @@ class TestAlphaBeta(unittest.TestCase):
             kloonisiirrot.remove(siirto)
             self.ristinolla.paivita_mahdolliset_siirrot(siirto, kloonisiirrot)
             self.ristinolla.tulosta_pelitilanne()
-            siirron_arvo =  self.botti.minimax_ab(self.ristinolla, 1, -100, 100, False, siirto, kloonisiirrot)
+            siirron_arvo =  self.botti.minimax_ab(self.ristinolla, 4, -100, 100, False, siirto, kloonisiirrot)
             if siirron_arvo > arvo:
                 arvo = siirron_arvo
-                seuraava_siirto = siirto
                 if arvo == 10:
                     break
             self.ristinolla.pelilauta[siirto[0]][siirto[1]] = '.'
         self.assertEqual(arvo, (0))
-
-
-    def
