@@ -8,7 +8,6 @@ class AlphaBeta:
         '''
         #ristinolla.tulosta_pelitilanne()
 
-
         loppu = ristinolla.tarkista_voitto(
             viimeisin_siirto[0], viimeisin_siirto[1])
 
@@ -24,7 +23,7 @@ class AlphaBeta:
             arvo = -100
             for koordinaatit in siirrot:
                 klooni_siirrot = set(siirrot)
-                print('max lisäyskoordinaatit', koordinaatit)
+                #print('max lisäyskoordinaatit', koordinaatit)
                 ristinolla.pelilauta[koordinaatit[0]][koordinaatit[1]] = 'X'
                 klooni_siirrot.remove(koordinaatit)
                 ristinolla.paivita_mahdolliset_siirrot(

@@ -35,13 +35,9 @@ class Ristinolla:
         '''Metodi lisää annettujen koordinaattien tyhjät naapurit seuraavien
         mahdollistojen siirtojen joukkoon.
         Palauttaa seuraavat siirrot settinä. '''
-        print(koordinaatit)
         for rivi in (-1, 0, 1):
             for sarake in (-1, 0, 1):
-                print('koordinaatit', koordinaatit[0]+rivi, koordinaatit[1]+sarake)
-                print('koordinaatit laudalla', self.pelilauta[koordinaatit[0]+rivi][koordinaatit[1]+sarake])
                 if self.pelilauta[koordinaatit[0]+rivi][koordinaatit[1]+sarake] == '.':
-                    print('lisää',koordinaatit[0]+rivi, koordinaatit[1]+sarake)
                     siirrot.add(
                         (koordinaatit[0]+rivi, koordinaatit[1]+sarake))
         return siirrot

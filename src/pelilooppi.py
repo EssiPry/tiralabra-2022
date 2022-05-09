@@ -45,9 +45,8 @@ class Pelilooppi:
                     kloonisiirrot.remove(koordinaatit)
                     self.ristinolla.paivita_mahdolliset_siirrot(koordinaatit, kloonisiirrot)
                     siirron_arvo = self.botti.minimax_ab(
-                    self.ristinolla, 3, -100, 100, False, koordinaatit, kloonisiirrot)
+                    self.ristinolla, 4, -100, 100, False, koordinaatit, kloonisiirrot)
                     kloonisiirrot.add(koordinaatit)
-                    print(koordinaatit, 'siirron arvo', siirron_arvo)
                     if siirron_arvo > arvo:
                         arvo = siirron_arvo
                         botin_siirto = koordinaatit
