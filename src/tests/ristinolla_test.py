@@ -58,15 +58,16 @@ class TestRistinolla(unittest.TestCase):
         self.assertEqual(self.ristinolla.tarkista_voitto(1, 8), 'kesken')
 
     def test_paivita_mahdolliset_siirrot(self):
-        siirrot = set()
+        siirrot = []
         self.ristinolla.pelilauta[2][7] = 'X'
         self.ristinolla.paivita_mahdolliset_siirrot((2, 7), siirrot)
         self.assertEqual(len(siirrot), 8)
-        self.assertEqual(siirrot, {
-                         (1, 6), (1, 7), (1, 8), (2, 6), (2, 8), (3, 6), (3, 7), (3, 8)})
+        print(siirrot)
+        self.assertEqual(siirrot,
+                         [(1, 6), (1, 7), (1, 8), (2, 6), (2, 8), (3, 6), (3, 7), (3, 8)])
 
     def test_paivita_mahdolliset_siirrot_useampi_merkki_laudalla(self):
-        siirrot = set()
+        siirrot = []
         self.ristinolla.pelilauta[2][7] = 'X'
         self.ristinolla.paivita_mahdolliset_siirrot((2, 7), siirrot)
         self.ristinolla.pelilauta[3][7] = 'X'

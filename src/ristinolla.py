@@ -34,12 +34,14 @@ class Ristinolla:
     def paivita_mahdolliset_siirrot(self, koordinaatit, siirrot):
         '''Metodi lisää annettujen koordinaattien tyhjät naapurit seuraavien
         mahdollistojen siirtojen joukkoon.
-        Palauttaa seuraavat siirrot settinä. '''
+        Palauttaa seuraavat siirrot listana. '''
         for rivi in (-1, 0, 1):
             for sarake in (-1, 0, 1):
                 if self.pelilauta[koordinaatit[0]+rivi][koordinaatit[1]+sarake] == '.':
-                    siirrot.add(
-                        (koordinaatit[0]+rivi, koordinaatit[1]+sarake))
+                    if (koordinaatit[0]+rivi, koordinaatit[1]+sarake) not in siirrot:
+                        siirrot.append(
+                            (koordinaatit[0]+rivi, koordinaatit[1]+sarake))
+                    #tähän vielä koordinaattien siirtäminen viimeiseksi jos löytyy jo listalta
         return siirrot
 
     def tarkista_voitto(self, rivi, sarake):

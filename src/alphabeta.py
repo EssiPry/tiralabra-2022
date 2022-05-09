@@ -19,15 +19,15 @@ class AlphaBeta:
 
         if vuoro is True:
             arvo = -100
-            for koordinaatit in siirrot:
-                klooni_siirrot = set(siirrot)
+            for koordinaatit in reversed(siirrot):
+                kloonisiirrot = list(siirrot)
                 ristinolla.pelilauta[koordinaatit[0]][koordinaatit[1]] = 'X'
-                klooni_siirrot.remove(koordinaatit)
+                kloonisiirrot.remove(koordinaatit)
                 ristinolla.paivita_mahdolliset_siirrot(
-                    koordinaatit, klooni_siirrot)
+                    koordinaatit, kloonisiirrot)
 
                 vertailu = self.minimax_ab(
-                    ristinolla, syvyys-1, alpha, beta, False, koordinaatit, klooni_siirrot)
+                    ristinolla, syvyys-1, alpha, beta, False, koordinaatit, kloonisiirrot)
                 arvo = max(arvo, vertailu)
                 ristinolla.pelilauta[koordinaatit[0]][koordinaatit[1]] = '.'
                 if arvo > beta:
@@ -38,14 +38,14 @@ class AlphaBeta:
         else:
             arvo = 100
 
-            for koordinaatit in siirrot:
-                klooni_siirrot = set(siirrot)
+            for koordinaatit in reversed(siirrot):
+                kloonisiirrot = list(siirrot)
                 ristinolla.pelilauta[koordinaatit[0]][koordinaatit[1]] = '0'
-                klooni_siirrot.remove(koordinaatit)
+                kloonisiirrot.remove(koordinaatit)
                 ristinolla.paivita_mahdolliset_siirrot(
-                    koordinaatit, klooni_siirrot)
+                    koordinaatit, kloonisiirrot)
                 vertailu = self.minimax_ab(
-                    ristinolla, syvyys-1, alpha, beta, True, koordinaatit, klooni_siirrot)
+                    ristinolla, syvyys-1, alpha, beta, True, koordinaatit, kloonisiirrot)
                 arvo = min(arvo, vertailu)
                 ristinolla.pelilauta[koordinaatit[0]][koordinaatit[1]] = '.'
                 if arvo < alpha:

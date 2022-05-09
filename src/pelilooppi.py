@@ -1,5 +1,3 @@
-import random
-
 
 class Pelilooppi:
 
@@ -14,7 +12,7 @@ class Pelilooppi:
         kunnes peli loppuu. '''
 
         self.ristinolla.lisaa_reunat_lautaan()
-        mahdolliset_siirrot = set()
+        mahdolliset_siirrot = []
         print('Tervetuloa pelamaan ristinollaa.')
         while True:
             pelaajan_siirto = self.kysy_pelaajan_siirto()
@@ -41,12 +39,12 @@ class Pelilooppi:
                 for koordinaatit in mahdolliset_siirrot:
                     self.ristinolla.pelilauta[koordinaatit[0]
                                           ][koordinaatit[1]] = 'X'
-                    kloonisiirrot = set(mahdolliset_siirrot)
+                    kloonisiirrot = list(mahdolliset_siirrot)
                     kloonisiirrot.remove(koordinaatit)
                     self.ristinolla.paivita_mahdolliset_siirrot(koordinaatit, kloonisiirrot)
                     siirron_arvo = self.botti.minimax_ab(
                     self.ristinolla, 4, -100, 100, False, koordinaatit, kloonisiirrot)
-                    kloonisiirrot.add(koordinaatit)
+                    kloonisiirrot.append(koordinaatit)
                     if siirron_arvo > arvo:
                         arvo = siirron_arvo
                         botin_siirto = koordinaatit
@@ -67,7 +65,7 @@ class Pelilooppi:
             else:
                 print('Ruutu on jo pelattu. Kokeile toista ruutua.')
 
-        print('Tittidii. Peli on ohi.')
+        print('Tittidii. Peli loppui.')
 
     def kysy_pelaajan_siirto(self):
         '''Metodi kysyy pelaajalta seuraavan siirron koordinaatit.

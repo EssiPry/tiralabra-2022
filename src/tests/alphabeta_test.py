@@ -6,7 +6,10 @@ class TestAlphaBeta(unittest.TestCase):
     def setUp(self):
         self.botti = AlphaBeta()
         self.ristinolla = Ristinolla()
-        self.siirrot = set()
+
+
+    def test_minimax_ab_minin_vuoro(self):
+        self.siirrot = []
         self.ristinolla.lisaa_reunat_lautaan()
         self.ristinolla.pelilauta[1][7] = '0'
         self.ristinolla.paivita_mahdolliset_siirrot((1,7), self.siirrot)
@@ -19,8 +22,6 @@ class TestAlphaBeta(unittest.TestCase):
         self.ristinolla.pelilauta[4][7] = '0'
         self.siirrot.remove((4,7))
         self.ristinolla.paivita_mahdolliset_siirrot((4,7), self.siirrot)
-
-    def test_minimax_ab_minin_vuoro(self):
         arvo = 100
         for siirto in self.siirrot:
             self.ristinolla.pelilauta[siirto[0]][siirto[1]] = '0'
@@ -33,10 +34,23 @@ class TestAlphaBeta(unittest.TestCase):
         self.assertEqual(arvo, (-10))
 
     def test_minimax_ab_maxin_vuoro(self):
+        self.siirrot = []
+        self.ristinolla.lisaa_reunat_lautaan()
+        self.ristinolla.pelilauta[1][7] = '0'
+        self.ristinolla.paivita_mahdolliset_siirrot((1,7), self.siirrot)
+        self.ristinolla.pelilauta[2][7] = '0'
+        self.siirrot.remove((2,7))
+        self.ristinolla.paivita_mahdolliset_siirrot((2,7), self.siirrot)
+        self.ristinolla.pelilauta[3][7] = '0'
+        self.siirrot.remove((3,7))
+        self.ristinolla.paivita_mahdolliset_siirrot((3,7), self.siirrot)
+        self.ristinolla.pelilauta[4][7] = '0'
+        self.siirrot.remove((4,7))
+        self.ristinolla.paivita_mahdolliset_siirrot((4,7), self.siirrot)
         arvo = -100
         for siirto in self.siirrot:
             self.ristinolla.pelilauta[siirto[0]][siirto[1]] = 'X'
-            kloonisiirrot = set(self.siirrot)
+            kloonisiirrot = list(self.siirrot)
             kloonisiirrot.remove(siirto)
             self.ristinolla.paivita_mahdolliset_siirrot(siirto, kloonisiirrot)
             self.ristinolla.tulosta_pelitilanne()
