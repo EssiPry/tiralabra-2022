@@ -32,18 +32,18 @@ class Pelilooppi:
                 self.ristinolla.paivita_mahdolliset_siirrot(
                     pelaajan_siirto, mahdolliset_siirrot)
 
-
-                #tästä alkaa botin(max) siirto
+                # tästä alkaa botin(max) siirto
                 arvo = -100
 
-                for koordinaatit in mahdolliset_siirrot:
+                for koordinaatit in reversed(mahdolliset_siirrot):
                     self.ristinolla.pelilauta[koordinaatit[0]
-                                          ][koordinaatit[1]] = 'X'
+                                              ][koordinaatit[1]] = 'X'
                     kloonisiirrot = list(mahdolliset_siirrot)
                     kloonisiirrot.remove(koordinaatit)
-                    self.ristinolla.paivita_mahdolliset_siirrot(koordinaatit, kloonisiirrot)
+                    self.ristinolla.paivita_mahdolliset_siirrot(
+                        koordinaatit, kloonisiirrot)
                     siirron_arvo = self.botti.minimax_ab(
-                    self.ristinolla, 4, -100, 100, False, koordinaatit, kloonisiirrot)
+                        self.ristinolla, 4, -100, 100, False, koordinaatit, kloonisiirrot)
                     kloonisiirrot.append(koordinaatit)
                     if siirron_arvo > arvo:
                         arvo = siirron_arvo
@@ -51,7 +51,7 @@ class Pelilooppi:
                         if arvo == 10:
                             break
                     self.ristinolla.pelilauta[koordinaatit[0]
-                                          ][koordinaatit[1]] = '.'
+                                              ][koordinaatit[1]] = '.'
 
                 print('botin siirto', botin_siirto)
                 self.ristinolla.pelilauta[botin_siirto[0]

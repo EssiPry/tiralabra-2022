@@ -35,20 +35,20 @@ class AlphaBeta:
                 alpha = max(alpha, arvo)
             return arvo
 
-        else:
-            arvo = 100
 
-            for koordinaatit in reversed(siirrot):
-                kloonisiirrot = list(siirrot)
-                ristinolla.pelilauta[koordinaatit[0]][koordinaatit[1]] = '0'
-                kloonisiirrot.remove(koordinaatit)
-                ristinolla.paivita_mahdolliset_siirrot(
-                    koordinaatit, kloonisiirrot)
-                vertailu = self.minimax_ab(
-                    ristinolla, syvyys-1, alpha, beta, True, koordinaatit, kloonisiirrot)
-                arvo = min(arvo, vertailu)
-                ristinolla.pelilauta[koordinaatit[0]][koordinaatit[1]] = '.'
-                if arvo < alpha:
-                    break
-                beta = min(beta, arvo)
-            return arvo
+        arvo = 100
+
+        for koordinaatit in reversed(siirrot):
+            kloonisiirrot = list(siirrot)
+            ristinolla.pelilauta[koordinaatit[0]][koordinaatit[1]] = '0'
+            kloonisiirrot.remove(koordinaatit)
+            ristinolla.paivita_mahdolliset_siirrot(
+                koordinaatit, kloonisiirrot)
+            vertailu = self.minimax_ab(
+                ristinolla, syvyys-1, alpha, beta, True, koordinaatit, kloonisiirrot)
+            arvo = min(arvo, vertailu)
+            ristinolla.pelilauta[koordinaatit[0]][koordinaatit[1]] = '.'
+            if arvo < alpha:
+                break
+            beta = min(beta, arvo)
+        return arvo

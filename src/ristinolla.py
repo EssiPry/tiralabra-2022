@@ -41,7 +41,11 @@ class Ristinolla:
                     if (koordinaatit[0]+rivi, koordinaatit[1]+sarake) not in siirrot:
                         siirrot.append(
                             (koordinaatit[0]+rivi, koordinaatit[1]+sarake))
-                    #tähän vielä koordinaattien siirtäminen viimeiseksi jos löytyy jo listalta
+                    else:
+                        siirrot.remove(
+                            (koordinaatit[0]+rivi, koordinaatit[1]+sarake))
+                        siirrot.append(
+                            (koordinaatit[0]+rivi, koordinaatit[1]+sarake))
         return siirrot
 
     def tarkista_voitto(self, rivi, sarake):

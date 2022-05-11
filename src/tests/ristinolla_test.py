@@ -72,11 +72,11 @@ class TestRistinolla(unittest.TestCase):
         self.ristinolla.paivita_mahdolliset_siirrot((2, 7), siirrot)
         self.ristinolla.pelilauta[3][7] = 'X'
         self.ristinolla.paivita_mahdolliset_siirrot((3, 7), siirrot)
-        siirrot.remove((3,7))
+        siirrot.remove((3, 7))
         self.ristinolla.pelilauta[4][7] = 'X'
         self.ristinolla.paivita_mahdolliset_siirrot((4, 7), siirrot)
-        siirrot.remove((4,7))
+        siirrot.remove((4, 7))
         self.ristinolla.pelilauta[4][8] = 'X'
         self.ristinolla.paivita_mahdolliset_siirrot((4, 8), siirrot)
-        siirrot.remove((4,8))
+        siirrot.remove((4, 8))
         self.assertEqual(len(siirrot), 14)
