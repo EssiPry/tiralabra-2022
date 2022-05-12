@@ -18,9 +18,9 @@ class Ristinolla:
         '''Metodi tulostaa sen hetkisen pelitilanteen'''
         for i in range(27):
             for j in range(27):
-                print(self.pelilauta[i][j], end=" ")
-            print("")
-        print("")
+                print(self.pelilauta[i][j], end=' ')
+            print('')
+        print('')
 
     def onko_sallittu_siirto(self, koordinaatit):
         '''Metodi tarkistaa voiko annetuille koordinaateille pelata merkkiä vai ei.

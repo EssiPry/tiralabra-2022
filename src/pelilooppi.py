@@ -1,3 +1,4 @@
+import time
 
 class Pelilooppi:
 
@@ -17,6 +18,7 @@ class Pelilooppi:
         while True:
             pelaajan_siirto = self.kysy_pelaajan_siirto()
             if self.ristinolla.onko_sallittu_siirto(pelaajan_siirto) is True:
+                print('')
                 self.ristinolla.pelilauta[pelaajan_siirto[0]
                                           ][pelaajan_siirto[1]] = '0'
                 print('pelaajan siirto', pelaajan_siirto)
@@ -33,6 +35,7 @@ class Pelilooppi:
                     pelaajan_siirto, mahdolliset_siirrot)
 
                 # tästä alkaa botin(max) siirto
+                alkuaika = time.time()
                 arvo = -100
 
                 for koordinaatit in reversed(mahdolliset_siirrot):
@@ -53,6 +56,9 @@ class Pelilooppi:
                     self.ristinolla.pelilauta[koordinaatit[0]
                                               ][koordinaatit[1]] = '.'
 
+                loppuaika = time.time()
+                aika = loppuaika - alkuaika
+                print(f'botin siirtoon kului {aika:.2f}s')
                 print('botin siirto', botin_siirto)
                 self.ristinolla.pelilauta[botin_siirto[0]
                                           ][botin_siirto[1]] = 'X'
