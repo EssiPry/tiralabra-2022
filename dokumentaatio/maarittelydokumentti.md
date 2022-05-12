@@ -8,7 +8,9 @@ Tekoälyn valitsee optimaalisen siirron käyttämällä minimax-algoritmia, jota
 
 #### Aika- ja tilavuusarvio
 
-Täydentyy ensi viikolla.
+Minimaxin aikavaativuus on O(b^m) ja tilavaativuus on O(bm), missä b on mahdollisten siirtojen määrä ja m on syvyys.
+
+Alpha-beta karsinnalla pahimman tapauksen aikavaativuus on sama kuin minimaxin eli O(b^m), mutta jos algoritmi valitsee aina parhaan mahdollisen polun, jolla 'turhia' haaroja saadaan karsittua aikavaativuus voi parantua O(b^m/2).
 
 #### Kielet
 
@@ -25,3 +27,5 @@ Täydentyy ensi viikolla.
 * [Abdolsaheb, A. [2020] How to make your Tic Tac Toe game unbeatable by using the minimax algorithm](https://www.freecodecamp.org/news/how-to-make-your-tic-tac-toe-game-unbeatable-by-using-the-minimax-algorithm-9d690bad4b37)
 * [John Levine - Minimax with Alpha Beta Pruning (Youtube-video)](https://www.youtube.com/watch?v=zp3VMe0Jpf8)
 * [Laaksonen, A. [2021] Tietorakenteet ja algoritmit](https://www.cs.helsinki.fi/u/ahslaaks/tirakirja/)
+* [Java  T point - Mini-Max Algorithm in Artificial Intelligence](https://www.javatpoint.com/mini-max-algorithm-in-ai)
+* [Java T Point - Alpha-beta pruning](https://www.javatpoint.com/ai-alpha-beta-pruning)
