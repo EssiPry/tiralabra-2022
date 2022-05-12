@@ -47,6 +47,14 @@ class TestRistinolla(unittest.TestCase):
         self.ristinolla.pelilauta[5][10] = '0'
         self.assertEqual(self.ristinolla.tarkista_voitto(5, 10), 'kesken')
 
+    def test_tarkista_voitto_d1_vika_keskella(self):
+        self.ristinolla.pelilauta[1][6] = 'X'
+        self.ristinolla.pelilauta[2][7] = 'X'
+        self.ristinolla.pelilauta[3][8] = 'X'
+        self.ristinolla.pelilauta[4][9] = 'X'
+        self.ristinolla.pelilauta[5][10] = 'X'
+        self.assertEqual(self.ristinolla.tarkista_voitto(4, 9), 'X')
+
     def test_tarkista_voitto_d2(self):
         self.ristinolla.pelilauta[5][4] = 'X'
         self.ristinolla.pelilauta[4][5] = 'X'
