@@ -23,9 +23,10 @@ Alpha-beta karsinnalla pahimman tapauksen aikavaativuus on sama kuin minimaxin e
 * opinto-ohjelma: tietojenkäsittelytieteen kandi
 
 #### Lähteet:
-* [Introduction to AI - 2.2. Minimax-algorithm](https://materiaalit.github.io/intro-to-ai/part2/)
-* [Abdolsaheb, A. [2020] How to make your Tic Tac Toe game unbeatable by using the minimax algorithm](https://www.freecodecamp.org/news/how-to-make-your-tic-tac-toe-game-unbeatable-by-using-the-minimax-algorithm-9d690bad4b37)
-* [John Levine - Minimax with Alpha Beta Pruning (Youtube-video)](https://www.youtube.com/watch?v=zp3VMe0Jpf8)
-* [Laaksonen, A. [2021] Tietorakenteet ja algoritmit](https://www.cs.helsinki.fi/u/ahslaaks/tirakirja/)
+
+* [Abdolsaheb, A. [2020] How to make your Tic Tac Toe game unbeatable by using the minimax algorithm](https://www.freecodecamp.org/news/how-to-make-your-tic-tac-toe-game-unbeatable-by-using-the-minimax-algorithm-9d690bad4b37/)
 * [Java  T point - Mini-Max Algorithm in Artificial Intelligence](https://www.javatpoint.com/mini-max-algorithm-in-ai)
-* [Java T Point - Alpha-beta pruning](https://www.javatpoint.com/ai-alpha-beta-pruning)
+* [Java T Point - Alpha-beta pruning](https://www.javatpoint.com/ai-alpha-beta-pruning)how-to-make-your-tic-tac-toe-game-unbeatable-by-using-the-minimax-algorithm-9d690bad4b37)
+* [Levine, J.[2017] - Minimax with Alpha Beta Pruning (Youtube-video)](https://www.youtube.com/watch?v=zp3VMe0Jpf8)
+* [Laaksonen, A. [2021] Tietorakenteet ja algoritmit](https://www.cs.helsinki.fi/u/ahslaaks/tirakirja/)
+* [Roos, T. [2021] Introduction to AI - 2.2. Minimax-algorithm](https://materiaalit.github.io/intro-to-ai/part2/)
