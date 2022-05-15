@@ -1,10 +1,19 @@
 class AlphaBeta:
 
     def __init__(self):
-        pass
+        '''Luokan konstruktori'''
 
     def minimax_ab(self, ristinolla, syvyys, alpha, beta, vuoro, viimeisin_siirto, siirrot):
         '''Minimax-algoritmi alpha-beta-karsinnalla. Palauttaa annetun siirron arvon.
+
+        Parametrit:
+            ristinolla - olio, jossa on sen hetkinen pelitilanne
+            syvyys - int, kertoo kuinka pitkälle tulevaisuuten siirtoja lasketaan
+            alpha - int, alphan arvo
+            beta - int, betan arvo
+            vuoro - boolean arvo, joka kertoo onko maksin vai minin vuoro
+            viimeisin_siirto - viimeisimmän siirron koordinaatit tuplena (rivi, sarake)
+            siirrot - lista botin mahdollisista siirroista
         '''
 
         loppu = ristinolla.tarkista_voitto(

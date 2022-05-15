@@ -1,5 +1,6 @@
 import time
 
+
 class Pelilooppi:
 
     def __init__(self, ristinolla, alphabeta):
@@ -18,9 +19,11 @@ class Pelilooppi:
         while True:
             pelaajan_siirto = self.kysy_pelaajan_siirto()
             print('')
-            print('pelaajan siirto', pelaajan_siirto)
-            self.tee_siirto(pelaajan_siirto, '0', mahdolliset_siirrot)
+            print('Pelaajan siirto', pelaajan_siirto)
+            self.tee_siirto_ja_paivita_botin_siirrot(
+                pelaajan_siirto, '0', mahdolliset_siirrot)
             if self.ristinolla.tarkista_voitto(pelaajan_siirto[0], pelaajan_siirto[1]) != 'kesken':
+                voittaja = 'Pelaaja'
                 break
             self.siirtojen_lkm += 2
             if self.siirtojen_lkm == 625:
@@ -31,17 +34,20 @@ class Pelilooppi:
             botin_siirto = self.kysy_max_botin_siirto(mahdolliset_siirrot)
             loppuaika = time.time()
             aika = loppuaika - alkuaika
-            print(f'botin siirtoon kului {aika:.2f}s')
-            print('botin siirto', botin_siirto)
-            self.tee_siirto(botin_siirto, 'X', mahdolliset_siirrot)
+            print(f'Botin siirron laskentaan kului {aika:.2f}s')
+            print('Botin siirto', botin_siirto)
+            self.tee_siirto_ja_paivita_botin_siirrot(
+                botin_siirto, 'X', mahdolliset_siirrot)
             if self.ristinolla.tarkista_voitto(botin_siirto[0], botin_siirto[1]) != 'kesken':
+                voittaja = 'Botti'
                 break
 
-        print('Tittidii. Peli loppui.')
+        print(f'Tittidii. Peli loppui. {voittaja} voitti pelin.')
 
     def kysy_pelaajan_siirto(self):
-        '''Metodi kysyy pelaajalta seuraavan siirron koordinaatit.
-        Palauttaa rivin ja sarakkeen tuplena'''
+        '''Metodi kysyy pelaajalta seuraavan siirron koordinaatit,
+        kunnes annetut koordinaatit ovat pelilaudalla  ja vapaat.
+        Palauttaa pelaajan siirron tuplena (rivi, sarake)'''
         rivi = -1
         sarake = -1
         while True:
@@ -70,6 +76,9 @@ class Pelilooppi:
         return (rivi, sarake)
 
     def kysy_max_botin_siirto(self, mahdolliset_siirrot):
+        '''Metodi laskee botille parhaan siirron parametrina annetujen
+        mahdollisten siirtojen listalta. Pelaa maksia.
+        Palauttaa botin siirron tuplena (rivi, sarake)'''
         arvo = -100
 
         for koordinaatit in reversed(mahdolliset_siirrot):
@@ -81,19 +90,20 @@ class Pelilooppi:
                 koordinaatit, kloonisiirrot)
             siirron_arvo = self.botti.minimax_ab(
                 self.ristinolla, 4, -100, 100, False, koordinaatit, kloonisiirrot)
-            print('koordinaatit', koordinaatit, 'arvo', siirron_arvo)
             kloonisiirrot.append(koordinaatit)
             if siirron_arvo > arvo:
                 arvo = siirron_arvo
                 botin_siirto = koordinaatit
-                if arvo == 10:
+                if arvo == 14:
                     break
             self.ristinolla.pelilauta[koordinaatit[0]
-                                          ][koordinaatit[1]] = '.'
+                                      ][koordinaatit[1]] = '.'
         return botin_siirto
 
-
     def kysy_min_botin_siirto(self, mahdolliset_siirrot):
+        '''Metodi laskee botille parhaan siirron parametrina annettun
+        mahdollisten siirtojen -listalta. Pelaa miniä.
+        Palauttaa botin siirron tuplena (rivi, sarake)'''
         arvo = 100
 
         for koordinaatit in reversed(mahdolliset_siirrot):
@@ -109,15 +119,25 @@ class Pelilooppi:
             if siirron_arvo < arvo:
                 arvo = siirron_arvo
                 botin_siirto = koordinaatit
-                if arvo == -10:
+                if arvo == -14:
                     break
             self.ristinolla.pelilauta[koordinaatit[0]
-                                          ][koordinaatit[1]] = '.'
+                                      ][koordinaatit[1]] = '.'
         return botin_siirto
 
-    def tee_siirto(self, siirto, merkki, mahdolliset_siirrot):
+    def tee_siirto_ja_paivita_botin_siirrot(self, siirto, merkki, mahdolliset_siirrot):
+        ''' Metodi lisää annetun merkin pelilaudalle annettuun kohtaan (siirto).
+        Poistaa annetun siirron koordinaatit botin mahdollisten siirtojen -listalta.
+        Päivittää annetun siirron tyhjät naapurit mahdollisten siirtojen -listalle.
+
+        Parametrit:
+            siirto - tuple (rivi, sarake)
+            merkki - X tai 0 riippuen pelaajasta
+            mahdolliset_siirrot - lista botin seuraavista mahdollisista siirroista
+        '''
         self.ristinolla.pelilauta[siirto[0]][siirto[1]] = merkki
         self.ristinolla.tulosta_pelitilanne()
         if siirto in mahdolliset_siirrot:
             mahdolliset_siirrot.remove(siirto)
-        self.ristinolla.paivita_mahdolliset_siirrot(siirto, mahdolliset_siirrot)
+        self.ristinolla.paivita_mahdolliset_siirrot(
+            siirto, mahdolliset_siirrot)

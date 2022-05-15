@@ -31,9 +31,15 @@ class Ristinolla:
         return False
 
     def paivita_mahdolliset_siirrot(self, koordinaatit, siirrot):
-        '''Metodi lisää annettujen koordinaattien tyhjät naapurit seuraavien
-        mahdollistojen siirtojen joukkoon.
-        Palauttaa seuraavat siirrot listana. '''
+        '''Metodi lisää annettujen koordinaattien tyhjät naapurit botin
+        mahdollistojen siirtojen -listaan. Jos koordinaatit ovat jo mahdollisten siirtojen
+        -listalla, ne päivitetään listan viimeisiksi siirroiksi. Palauttaa botin mahdolliset
+        siirrot listana.
+
+        Parametrit:
+            koordinaatit - tuple (rivi, sarake)
+            mahdolliset_siirrot - lista botin seuraavista mahdollisista siirroista
+        '''
         for rivi in (-1, 0, 1):
             for sarake in (-1, 0, 1):
                 if self.pelilauta[koordinaatit[0]+rivi][koordinaatit[1]+sarake] == '.':
@@ -49,7 +55,7 @@ class Ristinolla:
 
     def tarkista_voitto(self, rivi, sarake):
         '''Metodi tarkistaa täydentääkö viimeisin siirto pelilaudalle 5 peräkkäistä samaa
-        merkkiä eli voittaako siirto pelin. Metodi palauttaa voittavan merkin(str), tai tekstin kesken
+        merkkiä eli voittaako siirto pelin. Palauttaa voittavan merkin(str), tai tekstin kesken
         jos kumpikaan ei voita.
         '''
 
@@ -78,19 +84,19 @@ class Ristinolla:
                 pysty = 0
 
         diagonaali_1 = 0
-        px = rivi - 4
-        py = sarake - 4
+        px1 = rivi - 4
+        py1 = sarake - 4
 
         for i in range(9):
-            if px > 0 and px < 26 and py > 0 and py < 26:
-                if self.pelilauta[px][py] == self.pelilauta[px+1][py+1] and self.pelilauta[px][py] != '.':
+            if px1 > 0 and px1 < 26 and py1 > 0 and py1 < 26:
+                if self.pelilauta[px1][py1] == self.pelilauta[px1+1][py1+1] and self.pelilauta[px1][py1] != '.':
                     diagonaali_1 += 1
                     if diagonaali_1 == 4:
-                        return self.pelilauta[px][py]
+                        return self.pelilauta[px1][py1]
                 else:
                     diagonaali_1 = 0
-            px += 1
-            py += 1
+            px1 += 1
+            py1 += 1
 
         diagonaali_2 = 0
 
