@@ -3,7 +3,6 @@ class Ristinolla:
     def __init__(self):
         '''Luokan konstruktori'''
         self.pelilauta = [['.' for x in range(27)]for y in range(27)]
-        self.maksin_vuoro = False
 
     def lisaa_reunat_lautaan(self):
         '''Metodi lisää pelilautaan #-reunat'''
@@ -108,8 +107,5 @@ class Ristinolla:
                     diagonaali_2 = 0
             px2 -= 1
             py2 += 1
-
-        # if self.siirtojen_lkm == 625:
-        #    return 'tasapeli'
 
         return 'kesken'

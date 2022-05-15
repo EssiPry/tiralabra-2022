@@ -11,12 +11,13 @@ class AlphaBeta:
             viimeisin_siirto[0], viimeisin_siirto[1])
 
         if loppu == 'X':
-            return 10
+            return 10 + syvyys
         if loppu == '0':
-            return -10
+            return -10 + (-syvyys)
         if syvyys == 0:
             return 0
 
+        # maksin vuoro
         if vuoro is True:
             arvo = -100
             for koordinaatit in reversed(siirrot):
@@ -35,7 +36,7 @@ class AlphaBeta:
                 alpha = max(alpha, arvo)
             return arvo
 
-
+        # minin vuoro
         arvo = 100
 
         for koordinaatit in reversed(siirrot):
