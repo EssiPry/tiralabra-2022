@@ -5,6 +5,7 @@ from pelilooppi import Pelilooppi
 
 def main():
     ristinolla = Ristinolla()
+    ristinolla.lisaa_reunat_lautaan()
     botti = AlphaBeta()
     peli = Pelilooppi(ristinolla, botti)
     peli.aloita_peli()
