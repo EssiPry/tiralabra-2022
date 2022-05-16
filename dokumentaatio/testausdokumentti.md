@@ -6,9 +6,9 @@ tähän tulee kuva testikattavuus-raportista.
 
 ### Testaus
 
-Ristinolla- ja alphabeta-luokkia on testattu yksikkötesteilla. Alphabeta-luokkaa testatessa algoritmille on annettu erilaisia pelitilanteita, joiden avulla testataan löytääkö algoritmi optimaalisen siirron.
+Ristinolla- ja alphabeta-luokkia on testattu yksikkötesteilla. Alphabeta-luokkaa testatessa algoritmille on annettu erilaisia pelitilanteita, joiden avulla testataan löytääkö algoritmi optimaalisen siirron. Algoritmin palauttamaan siirtoa verrataan optimisiirtoon.
 
-Tähän esimerkki-kuva alphabetan testiskenaarioista.
+
 
 Yksikkötestien lisäksi Alphabeta-luokkaa on testattu manuaalisesti pelaamalla bottia vastaan.
 
@@ -18,8 +18,7 @@ Lisäksi ristinolla-, alphabeta- ja pelilooppi-luokkien oikeellisutta on testatt
 
 ### Mahdollisten siirtojen määrä ja botin siirron laskentaan kulunut aika
 
-Mahdollisten siirtojen lukumäärä vaikuttaa botin optimaalisen siirron laskenta-aikaan. Jos mahdollisia siirtoja on enemmän kuin 20, eikä botilla ole 'optimaalista' siirtoa, eli botti voisi blokata vastustajan kolmen suoran tai voisi jatkaa omaa kolmen tai neljän suoraa, siirron löytyminen hidastuu huomattavasti.
-Jos optimaalinen siirto on olemassa, algoritmin alpha-beta valitsee sen ja karsii loput läpikäytävät siirrot, joka nopeuttaa algoritmin toimintaa.
+Mahdollisten siirtojen lukumäärä vaikuttaa botin optimaalisen siirron laskenta-aikaan. Jos mahdollisia siirtoja on enemmän kuin 20, eikä botilla ole 'optimaalista' siirtoa, eli botti voisi estää toisen pelaajan kolmen suoran tai voisi jatkaa omaa kolmen tai neljän suoraa, siirron löytyminen hidastuu huomattavasti. Jos optimaalinen siirto on olemassa, algoritmin alpha-beta valitsee sen ja karsii loput läpikäytävät siirrot, joka nopeuttaa algoritmin toimintaa.
 
 Alla muutama esimerkki siirtojen määräästä ja kuinka kauan botilla menee sopivan siirron löytämiseen (s).
 
@@ -54,4 +53,4 @@ poetry run invoke coverage-report
 
 Raportti generoituu htmlcov -kansioon.
 
-Huom. testikattavuusraportin generointi kestää n. X minuuttia.
+Huom. testikattavuusraportin generointi kestää n. 4-5 minuuttia.

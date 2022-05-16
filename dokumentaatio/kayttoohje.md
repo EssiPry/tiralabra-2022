@@ -27,3 +27,5 @@ poetry run invoke test
 ```bash
 poetry run invoke lint
 ```
+
+Pelissä on tekstikäyttöliittymä. Pelaaja aloittaa pelin. Pelaajan merkki on '0' ja botin merkki on 'X'.

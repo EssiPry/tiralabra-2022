@@ -22,7 +22,7 @@ Algoritmin tilavaativuus on myös annettu O(bm), jossa b on mahdollisten siirtoj
 
 Algoritmiä pitäisi optimoida. Se on hidas, varsinkin jos ja kun mahdollisten siirtojen määrä nousee yli 20, eikä botilla tai pelaajalla ole jo kolmen tai neljän suoraa. Botin tämän hetkinen voittostrategia on, että pelaaja kyllästyy odottamaan vuoroaan.
 
-Tällä hetkellä minimaxissa käytettään syvyyttä 4 eli algoritmi tutkii molempien pelaajien kaksi seuraavaa siirtoa. Tämä tarkoittaa, että botti osaa blokata toisen pelaajan siirrot, mutta se ei osaa rakentaa itselleen voittavaa suoraa, ellei pelilaudalla ole sattumalta kolmea botin merkkiä peräkkäin.
+Tällä hetkellä minimaxissa käytettään syvyyttä 4 eli algoritmi tutkii molempien pelaajien kaksi seuraavaa siirtoa. Tämä tarkoittaa, että botti osaa estää pelaajaa saamasta viiden suoraa, mutta se ei osaa rakentaa itselleen voittavaa suoraa, ellei pelilaudalla ole jo kolmea botin merkkiä peräkkäin.
 
 Syvyyden lisääminen lisäisi botin 'älykkyyttä', mutta se lisääminen myös hidastaa bottia, sillä tutkittavien tapausten määrä nousee eksponentiaalisesti (mahdolliset siirrot ^ syvyys).
 
