@@ -1,12 +1,17 @@
 ## Tietorakenteet ja algoritmit harjoitustyö
 
-Ristinolla 25x25 ruudukolla. Peli on vielä kesken ja sitä voi tällä hetkellä pelata melko tyhmää bottia vastaan. Pelaaja on 0 ja botti on X.
+Tämä projekti on tehty Helsingin yliopiston Tietorakenteet ja algoritmit harjoitustyö-kurssille.
+
+Työ on ristinolla-botti, jota vastaan voi pelata ristinollaa 25x25 ruudukolla. Viiden suora voittaa pelin. Botti osaa estää pelaajan suorat hyvin, mutta oman voittosuoran löytämisessä on vielä haasteita.
+
+Botin tekemiseen on käytetty minimax-algoritmia alpha-beta karsinnalla.
 
 ### Dokumentaatio
 
 * [Määrittelydokumentti](https://github.com/EssiPry/tiralabra-2022/blob/main/dokumentaatio/maarittelydokumentti.md)
 * [Käyttöohje](https://github.com/EssiPry/tiralabra-2022/blob/main/dokumentaatio/kayttoohje.md)
 * [Testausdokumentti](https://github.com/EssiPry/tiralabra-2022/blob/main/dokumentaatio/testausdokumentti.md)
+* [Toteutusdokumentti](https://github.com/EssiPry/tiralabra-2022/blob/main/dokumentaatio/toteutusdokumentti.md)
 
 ### Viikkoraportit
 
