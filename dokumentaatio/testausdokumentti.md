@@ -2,13 +2,17 @@
 
 ### Testikattavuus
 
-tähän tulee kuva testikattavuus-raportista.
+![Coverage report](https://github.com/EssiPry/tiralabra-2022/blob/main/dokumentaatio/kuvat/coverage_report.png)
+
+Pelilooppi-luokkaa on testattu pääasiassa manuaalisesti.
 
 ### Testaus
 
-Ristinolla- ja alphabeta-luokkia on testattu yksikkötesteilla. Alphabeta-luokkaa testatessa algoritmille on annettu erilaisia pelitilanteita, joiden avulla testataan löytääkö algoritmi optimaalisen siirron. Algoritmin palauttamaan siirtoa verrataan optimisiirtoon.
+Ristinolla- ja alphabeta-luokkia on testattu yksikkötesteilla. Alphabeta-luokkaa testatessa algoritmille on annettu erilaisia pelitilanteita, joiden avulla testataan löytääkö algoritmi optimaalisen siirron, alla muutama esimerkkitilanne. Algoritmin palauttamaan siirtoa verrataan optimisiirtoon.
 
+![diagonaali suoran täydentäminen](https://github.com/EssiPry/tiralabra-2022/blob/main/dokumentaatio/kuvat/diagonaali_taydentaminen.png)
 
+![estää neljän suoran](https://github.com/EssiPry/tiralabra-2022/blob/main/dokumentaatio/kuvat/estaa_neljan_suoran.png)
 
 Yksikkötestien lisäksi Alphabeta-luokkaa on testattu manuaalisesti pelaamalla bottia vastaan.
 
@@ -53,4 +57,4 @@ poetry run invoke coverage-report
 
 Raportti generoituu htmlcov -kansioon.
 
-Huom. testikattavuusraportin generointi kestää n. 4-5 minuuttia.
+Huom. testikattavuusraportin generointi kestää n. 5-8 minuuttia.
