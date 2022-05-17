@@ -16,7 +16,7 @@ Näiden luokkien lisäksi on main-luokka, joka käynnistää pelin.
 
 Algoritmi taitaa toimia annettujen aikavaativuuksien puitteissa eli pahimman tapauksen O(b^m) ja parhaan tapauksen O(b^m/2), missä b on seuraavien mahdollisten siirtojen määrä ja m on maksimisyvyys. Koko ohjelman aikavaativuus on suurempi.
 
-Algoritmin tilavaativuus on myös annettu O(bm), jossa b on mahdollisten siirtojen määrä ja m on maksimisyvyys. Mahdollisten siirtojen määrä kasvaa jokaisella syvyydellä (max 8 koordinaattiparia), kun mahdollisten siirtojen listaan lisätään uuden siirron tyhjät naapurit, mutta tämä ei vaikutta tilavaativuuteen magnituudiin.
+Algoritmin tilavaativuus on suurempi kuin annettu O(bm), jossa b on mahdollisten siirtojen määrä ja m on maksimisyvyys, sillä mahdollisten siirtojen lista kloonataan joka kerta kun minimaxia kutsutaan. Tilavaativuus on O(b^m). Lisäksi mahdollisten siirtojen määrä kasvaa jokaisella syvyydellä (max 8 koordinaattiparia), kun mahdollisten siirtojen listaan lisätään uuden siirron tyhjät naapurit, mutta tämä ei vaikutta tilavaativuuteen magnituudiin.
 
 ### Työn mahdolliset puutteet ja parannusehdotukset:
 
